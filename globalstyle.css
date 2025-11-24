@@ -29,4 +29,5 @@ img {
 body {
   background-color: var(--Neutral900);
   font-family: var(--primary-font);
+  max-height: 100vh;
 }
