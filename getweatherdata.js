@@ -45,6 +45,8 @@ export const matchWetherCodeToIcon = (code)=>{
 
 
 export const getCurrentWeather = async (latitude, Longitude) => {
+    console.log("running getcurrent wether ...")
+
   console.log(latitude, Longitude, "in getwetherinfo module")
   try {
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${Longitude}&current=temperature_2m,apparent_temperature,precipitation,wind_speed_10m,relative_humidity_2m,cloud_cover,weather_code`;
@@ -67,6 +69,7 @@ export const getCurrentWeather = async (latitude, Longitude) => {
 
 
 export const getCurrentCityByLonAndLat = async(latitude, longitude) => {
+  console.log("running getcurrent city ...")
   const url = `https://api.opencagedata.com/geocode/v1/json?q=${latitude}%2C+${longitude}&key=98daf9091ea147d7aebc14fc4afda562`;
   try {
     const response = await fetch(url);
