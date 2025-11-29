@@ -126,7 +126,7 @@ const setHourlyWetherInfo = (res) => {
   for (let i = 0; i < 168; i++) {
     if (
       new Date(res.hourly.time[i]).toString().split(" ")[0] == theDay &&
-      theDayDailyInfo.length < 8
+      theDayDailyInfo.length < 8 && new Date(res.hourly.time[i]) > new Date()
     ) {
       theDayDailyInfo.push({
         time: new Date(res.hourly.time[i]).toLocaleTimeString(),
@@ -136,16 +136,26 @@ const setHourlyWetherInfo = (res) => {
     }
   }
 
+  getHourlyWeatherElements().HourlyDayElements.forEach((element, index) =>{
+    if (index >= theDayDailyInfo.length ) {
+      hideDailyElement(element);
+    }else {
+      showDailyElement(element);
+    }
+  })
+
+  console.log(theDayDailyInfo)
+
   getHourlyWeatherElements().hourTimeElements.forEach((element, index)=>{
-    element.innerText = theDayDailyInfo[index].time.replaceAll(':00', "")
+    element.innerText = theDayDailyInfo[index]?.time?.replaceAll(':00', "")
   })
 
     getHourlyWeatherElements().hourIconImgs.forEach((element, index)=>{
-    element.src = matchWetherCodeToIcon(theDayDailyInfo[index].code)
+    element.src = matchWetherCodeToIcon(theDayDailyInfo[index]?.code)
   })
 
     getHourlyWeatherElements().hourTempElements.forEach((element, index)=>{
-    element.innerText = theDayDailyInfo[index].temp
+    element.innerText = theDayDailyInfo[index]?.temp
   })
 
 };
@@ -200,3 +210,12 @@ const hideErrorAccessingLocationElement = () => {
   getErrorAccessingLocationElements().ErrorLocationContainer.style.display =
     "none";
 };
+
+
+const showDailyElement = (element) => {
+  element.style.display = 'flex'
+}
+
+const hideDailyElement = (element) => {
+  element.style.display = 'none'
+}

@@ -66,7 +66,7 @@ export const getCurrentWeather = async (latitude, Longitude) => {
 
   console.log(latitude, Longitude, "in getwetherinfo module");
   try {
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${Longitude}&current=temperature_2m,apparent_temperature,precipitation,wind_speed_10m,relative_humidity_2m,cloud_cover,weather_code`;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${Longitude}&current=temperature_2m,apparent_temperature,precipitation,wind_speed_10m,relative_humidity_2m,cloud_cover,weather_code&timezone=auto`;
     const response = await fetch(url);
     if (!response.ok) {
       const error = await response.json();
@@ -89,7 +89,7 @@ export const getDailyWeather = async (latitude, longitude) => {
 
   console.log(latitude, longitude, "in getwetherinfo module");
   try {
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,weather_code`;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=auto`;
     const response = await fetch(url);
     if (!response.ok) {
       const error = await response.json();
@@ -112,7 +112,7 @@ export const getHourlyWeather = async (latitude, longitude) => {
 
   console.log(latitude, longitude, "in getwetherinfo module");
   try {
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,weather_code`;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,weather_code&timezone=auto`;
     const response = await fetch(url);
     if (!response.ok) {
       const error = await response.json();
