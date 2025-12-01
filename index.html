@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="./headerstyles.css" />
     <link rel="stylesheet" href="./mainstyle.css" />
     <script src="./app.js" type="module" defer></script>
-    <script src="./getweatherdata.js" type="module" defer></script>
+    <script src="./getApiData.js" type="module" defer></script>
     <script src="./getElements.js" type="module" defer></script>
     <script src="./searchLocationLogic.js" type="module" defer></script>
     <title>Frontend Mentor | Weather app</title>
@@ -81,20 +81,25 @@
       <section id="hero-section" class="hero-content">
         <h1>How's the sky looking today?</h1>
         <div id="search-container">
-          <div id="search-bar">
-            <input
-              type="text"
-              id="search_input"
-              name="search"
-              placeholder="Search for a place"
-            />
-            <img
-              src="./assets/images/icon-search.svg"
-              alt="search for city"
-              id="search-bar-img"
-            />
+          <div id="search-container-search-btn">
+            <div id="search-bar">
+              <input
+                type="text"
+                id="search_input"
+                name="search"
+                placeholder="Search for a place"
+              />
+              <img
+                src="./assets/images/icon-search.svg"
+                alt="search for city"
+                id="search-bar-img"
+              />
+            </div>
+            <button id="search_btn">Search</button>
           </div>
-          <button id="search_btn">Search</button>
+            <div id="search-container-result">
+
+            </div>
         </div>
       </section>
       <section class="wether_info">

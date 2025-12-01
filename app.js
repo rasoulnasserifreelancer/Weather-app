@@ -2,7 +2,7 @@ import {
   getwetherinfo,
   getCurrentCityByLonAndLat,
   matchWetherCodeToIcon,
-} from "./getweatherdata.js";
+} from "./getApiData.js";
 
 import {
   getCurrentWeatherElements,
@@ -23,6 +23,8 @@ window.onload = async () => {
   );
 };
 
+console.log("running app.js");
+
 const currentDayElement = getHourlyWeatherElements().CurrentDayElement;
 
 currentDayElement.addEventListener("change", (e) => {
@@ -37,7 +39,7 @@ currentDayElement.addEventListener("change", (e) => {
   console.log(e.target.value);
 });
 
-const setWetherInfo = (weatherInfo) => {
+export const setWetherInfo = (weatherInfo) => {
   console.log("running setwether info callback");
   setCurrentWetherInfo(weatherInfo[0]);
   setDailyWetherInfo(weatherInfo[1]);
@@ -192,7 +194,7 @@ const setPsitionCallbck = async (pos) => {
     );
 
     weatherInfo = await Promise.all(
-      await getwetherinfo(currentLatitude, currentLlongitude)
+      getwetherinfo(currentLatitude, currentLlongitude)
     );
     setWetherInfo(weatherInfo);
   } catch (error) {
@@ -203,26 +205,27 @@ const setPsitionCallbck = async (pos) => {
 
 const setLoadingState = () => {};
 
-const hideWeatherInfoElements = () => {
+export const hideWeatherInfoElements = () => {
   getCurrentWeatherElements().CurrentWeatherElement.style.display = "none";
   getDailyWeatherElements().DailyElement.style.display = "none";
   getHourlyWeatherElements().HourlyElement.style.display = "none";
 };
 
-const showWeatherInfoElements = () => {
+export const showWeatherInfoElements = () => {
   getCurrentWeatherElements().CurrentWeatherElement.style.display = "flex";
   getDailyWeatherElements().DailyElement.style.display = "flex";
   getHourlyWeatherElements().HourlyElement.style.display = "block";
 };
 
-const showErrorAccessingLocationElement = () => {
+export const showErrorAccessingLocationElement = () => {
   getErrorAccessingLocationElements().ErrorLocationContainer.style.display =
     "flex";
 };
 
-const hideErrorAccessingLocationElement = () => {
+export const hideErrorAccessingLocationElement = () => {
   getErrorAccessingLocationElements().ErrorLocationContainer.style.display =
     "none";
+  console.log("running hide Error Location accessing")
 };
 
 const showDailyElement = (element) => {

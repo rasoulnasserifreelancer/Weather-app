@@ -29,9 +29,42 @@
 }
 
 #search-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  gap: 0.5rem;
+}
+
+#search-container-search-btn {
   display: flex;
   gap: 1rem;
+    grid-column: 1/3;
+  grid-row: 1/2;
 }
+
+#search-container-result {
+  grid-column: 1/3;
+  grid-row: 2/3;
+  border-radius: 8px;
+   background-color: var(--Neutral600);
+ color: var(--Neutral200);
+}
+
+#search-container-result div{
+  padding: 0.1rem 0.2rem;
+}
+
+#search-container-result div p{
+  padding: 0.4rem;
+  margin: 0.2rem;
+  border-radius: 4px;
+}
+
+#search-container-result div p:hover{
+  background-color: var(--Neutral800);
+}
+
+
 
 #search-bar {
   display: flex;
@@ -51,6 +84,8 @@
   border-radius: 6px;
   background-color: var(--blue700);
 }
+
+
 
 .wether_info {
   display: grid;

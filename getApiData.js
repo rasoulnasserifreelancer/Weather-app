@@ -7,7 +7,11 @@ const stormSky = "./assets/images/icon-storm.webp";
 const fogySky = "./assets/images/icon-fog.webp";
 const drizzleSky = "./assets/images/icon-drizzle.webp";
 
-class NotFoundError extends Error {}
+
+console.log("running getapidata.js")
+
+
+export class NotFoundError extends Error {}
 
 const wethercode = {
   0: sunnySky,
@@ -130,11 +134,8 @@ export const getHourlyWeather = async (latitude, longitude) => {
   }
 };
 
-export const getwetherinfo = async (latitude, longitude) => {
-  const currentWeatherInfo = await getCurrentWeather(latitude, longitude);
-  const dailyWeatherInfo = await getDailyWeather(latitude, longitude);
-  const hourlyWeatherInfo = await getHourlyWeather(latitude, longitude);
-  return [currentWeatherInfo, dailyWeatherInfo, hourlyWeatherInfo];
+export const getwetherinfo = (latitude, longitude) => {
+  return [getCurrentWeather(latitude, longitude), getDailyWeather(latitude, longitude), getHourlyWeather(latitude, longitude)];
 };
 
 export const getCurrentCityByLonAndLat = async (latitude, longitude) => {
@@ -157,3 +158,22 @@ export const getCurrentCityByLonAndLat = async (latitude, longitude) => {
     throw err;
   }
 };
+
+
+
+export const getCurrentLonAndLatByCity = async (city) => {
+  try {
+    const response = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=4&language=en&format=json`);
+    const result = await response.json();
+    const cities = result?.results.map((result)=>result.name);
+    const latitudes = result?.results.map((result)=>result.latitude)
+    const longitudes = result?.results.map((result)=>result.longitude)
+    const contries = result?.results.map((result)=>result.country)
+    if (!cities || !latitudes || !longitudes || !contries) {
+      throw new NotFoundError("city not found");
+    }
+    return {cities, latitudes, longitudes, contries}
+  } catch (error) {
+    throw err;
+  }
+}
