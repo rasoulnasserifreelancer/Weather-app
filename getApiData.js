@@ -7,9 +7,7 @@ const stormSky = "./assets/images/icon-storm.webp";
 const fogySky = "./assets/images/icon-fog.webp";
 const drizzleSky = "./assets/images/icon-drizzle.webp";
 
-
-console.log("running getapidata.js")
-
+console.log("running getapidata.js");
 
 export class NotFoundError extends Error {}
 
@@ -135,7 +133,11 @@ export const getHourlyWeather = async (latitude, longitude) => {
 };
 
 export const getwetherinfo = (latitude, longitude) => {
-  return [getCurrentWeather(latitude, longitude), getDailyWeather(latitude, longitude), getHourlyWeather(latitude, longitude)];
+  return [
+    getCurrentWeather(latitude, longitude),
+    getDailyWeather(latitude, longitude),
+    getHourlyWeather(latitude, longitude),
+  ];
 };
 
 export const getCurrentCityByLonAndLat = async (latitude, longitude) => {
@@ -159,21 +161,21 @@ export const getCurrentCityByLonAndLat = async (latitude, longitude) => {
   }
 };
 
-
-
 export const getCurrentLonAndLatByCity = async (city) => {
   try {
-    const response = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=4&language=en&format=json`);
+    const response = await fetch(
+      `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=4&language=en&format=json`
+    );
     const result = await response.json();
-    const cities = result?.results.map((result)=>result.name);
-    const latitudes = result?.results.map((result)=>result.latitude)
-    const longitudes = result?.results.map((result)=>result.longitude)
-    const contries = result?.results.map((result)=>result.country)
+    const cities = result?.results.map((result) => result.name);
+    const latitudes = result?.results.map((result) => result.latitude);
+    const longitudes = result?.results.map((result) => result.longitude);
+    const contries = result?.results.map((result) => result.country);
     if (!cities || !latitudes || !longitudes || !contries) {
       throw new NotFoundError("city not found");
     }
-    return {cities, latitudes, longitudes, contries}
+    return { cities, latitudes, longitudes, contries };
   } catch (error) {
     throw err;
   }
-}
+};

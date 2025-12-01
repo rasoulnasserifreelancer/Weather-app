@@ -225,7 +225,7 @@ export const showErrorAccessingLocationElement = () => {
 export const hideErrorAccessingLocationElement = () => {
   getErrorAccessingLocationElements().ErrorLocationContainer.style.display =
     "none";
-  console.log("running hide Error Location accessing")
+  console.log("running hide Error Location accessing");
 };
 
 const showDailyElement = (element) => {
