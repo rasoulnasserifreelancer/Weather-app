@@ -4,17 +4,21 @@ import {
   matchWetherCodeToIcon,
 } from "./getApiData.js";
 
+
+
+
 import {
   getCurrentWeatherElements,
   getDailyWeatherElements,
   getHourlyWeatherElements,
   getErrorAccessingLocationElements,
 } from "./getElements.js";
+import { getweatherInfoGotByUserLocation, setPsitionCallbck } from "./getLocationLogic.js";
+import { getweatherInfoGotByUserSearch } from "./searchLocationLogic.js";
 
-let currentLatitude;
-let currentLlongitude;
+
 let currentLocation;
-let weatherInfo; // i need to call sethourlyweatherinfo on event listener after initial loading for each day so i need weatherinfo to be global
+
 
 window.onload = async () => {
   navigator.geolocation.getCurrentPosition(
@@ -28,6 +32,8 @@ console.log("running app.js");
 const currentDayElement = getHourlyWeatherElements().CurrentDayElement;
 
 currentDayElement.addEventListener("change", (e) => {
+  let weatherInfo = getweatherInfoGotByUserSearch() || getweatherInfoGotByUserLocation() ;
+  console.log(weatherInfo);
   for (let option of e.target) {
     if (option.value === e.target.value) {
       console.log(option);
@@ -180,28 +186,30 @@ const setFallbackForApi = (err) => {};
 
 const setFallbackForLocation = (err) => {
   hideWeatherInfoElements();
+  getErrorAccessingLocationElements().ErrorLocationMessage.innerText =
+    "We Couldn't access your location, please try searching for your location";
   showErrorAccessingLocationElement();
 };
 
-const setPsitionCallbck = async (pos) => {
-  currentLatitude = pos.coords.latitude;
-  currentLlongitude = pos.coords.longitude;
-  hideErrorAccessingLocationElement();
-  try {
-    currentLocation = await getCurrentCityByLonAndLat(
-      currentLatitude,
-      currentLlongitude
-    );
+// const setPsitionCallbck = async (pos) => {
+//   currentLatitude = pos.coords.latitude;
+//   currentLlongitude = pos.coords.longitude;
+//   hideErrorAccessingLocationElement();
+//   try {
+//     currentLocation = await getCurrentCityByLonAndLat(
+//       currentLatitude,
+//       currentLlongitude
+//     );
 
-    weatherInfo = await Promise.all(
-      getwetherinfo(currentLatitude, currentLlongitude)
-    );
-    setWetherInfo(weatherInfo);
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
-};
+//     weatherInfo = await Promise.all(
+//       getwetherinfo(currentLatitude, currentLlongitude)
+//     );
+//     setWetherInfo(weatherInfo);
+//   } catch (error) {
+//     console.log(error);
+//     throw error;
+//   }
+// };
 
 const setLoadingState = () => {};
 

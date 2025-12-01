@@ -1,6 +1,8 @@
 import {
   hideErrorAccessingLocationElement,
+  hideWeatherInfoElements,
   setWetherInfo,
+  showErrorAccessingLocationElement,
   showWeatherInfoElements,
 } from "./app.js";
 import {
@@ -8,8 +10,9 @@ import {
   getwetherinfo,
   NotFoundError,
 } from "./getApiData.js";
-import { getCurrentWeatherElements } from "./getElements.js";
+import { getCurrentWeatherElements, getErrorAccessingLocationElements } from "./getElements.js";
 
+let weatherInfogotByUserSearch;
 const searchLocationBtnElement = document.getElementById("search_btn");
 const searchLocationSearchElement = document.getElementById("search_input");
 const SearchResultContainerElement = document.getElementById(
@@ -114,3 +117,34 @@ SearchResultContainerElement.addEventListener("click", async (e) => {
 const SetLocation = (city, country) => {
   getCurrentWeatherElements().locationElement.innerHTML = `${city}, ${country}`;
 };
+
+
+searchLocationBtnElement.addEventListener('click', async (e)=> {
+    const inputValue = searchLocationSearchElement.value;
+    try {
+      const result = await getCurrentLonAndLatByCity(inputValue);
+      const cityIndex = result?.cities.findIndex((city) => city.toLowerCase() === inputValue.toLowerCase());
+      if (cityIndex !== -1){
+        const city = result.cities[cityIndex];
+        const country = result.contries[cityIndex];
+        const latitude = result.latitudes[cityIndex];
+        const longitude = result.longitudes[cityIndex];
+        weatherInfogotByUserSearch = await Promise.all(getwetherinfo(latitude, longitude));
+        deleteResult()
+        setWetherInfo(weatherInfogotByUserSearch);
+        SetLocation(city, country);
+        showWeatherInfoElements()
+        hideErrorAccessingLocationElement();
+      }else {
+        getErrorAccessingLocationElements().ErrorLocationMessage.innerText = "we couldn't find your city name, please try again ...";
+        hideWeatherInfoElements();
+        showErrorAccessingLocationElement()
+      }
+    } catch (error) {
+      if (error instanceof NotFoundError) {
+        showResult(error.message);
+      }
+    }
+})
+
+export const getweatherInfoGotByUserSearch = () => weatherInfogotByUserSearch
