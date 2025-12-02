@@ -1,4 +1,4 @@
-import { getCurrentWeatherElements, getDailyWeatherElements, getErrorAccessingLocationElements, getHourlyWeatherElements } from "./getElements.js";
+import { getCurrentWeatherElements, getDailyWeatherElements, getErrorElement, getHourlyWeatherElements } from "./getElements.js";
 console.log("showhideelements.js module");
 
 export const hideWeatherInfoElements = () => {
@@ -14,14 +14,18 @@ export const showWeatherInfoElements = () => {
   getHourlyWeatherElements().HourlyElement.style.display = "block";
 };
 
-export const showErrorAccessingLocationElement = () => {
-  getErrorAccessingLocationElements().ErrorLocationContainer.style.display =
-    "flex";
+export const showErrorElement = (message) => {
+  const errElementContainer = getErrorElement().ErrorLocationContainer;
+  errElementContainer.style.display ="flex";
+  errElementContainer.style.opacity = "1" ;
+  errElementContainer.focus()
+  const messageContainer = getErrorElement().ErrorLocationMessage;
+  messageContainer.innerText = message
 };
 
-export const hideErrorAccessingLocationElement = () => {
+export const hideErrorElement = () => {
   console.log("running hide Error Location accessing");
-  getErrorAccessingLocationElements().ErrorLocationContainer.style.display =
+  getErrorElement().ErrorLocationContainer.style.display =
     "none";
 };
 

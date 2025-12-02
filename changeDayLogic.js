@@ -17,6 +17,4 @@ currentDayElement.addEventListener("change", (e) => {
       setHourlyWetherInfo(weatherInfo[2]);
     }
   }
-  console.log(e.target);
-  console.log(e.target.value);
 });

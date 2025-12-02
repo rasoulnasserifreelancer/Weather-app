@@ -32,6 +32,13 @@
     <title>Frontend Mentor | Weather app</title>
   </head>
   <body>
+          <div class="error-element" id="backdrop">
+
+        <div class="error-element-inside" aria-modal="true" role="dialog" aria-labelledby="dialog-lable">
+          <h2 id="dialog-lable"></h2>
+          <div id="close-error-btn"><img width="96" height="96" src="https://img.icons8.com/neon/96/delete-sign.png" alt="delete-sign"/></div>
+        </div>
+      </div>
     <header>
       <div id="logo">
         <a href="/">
@@ -83,6 +90,8 @@
     </header>
 
     <main id="main-content">
+
+
       <section id="hero-section" class="hero-content">
         <h1>How's the sky looking today?</h1>
         <div id="search-container">
@@ -102,17 +111,10 @@
             </div>
             <button id="search_btn">Search</button>
           </div>
-            <div id="search-container-result">
-
-            </div>
+          <div id="search-container-result"></div>
         </div>
       </section>
       <section class="wether_info">
-        <div class="error-accessing-location">
-          <h2>
-
-          </h2>
-        </div>
         <div class="wether_info__current">
           <div class="wether_info_current_poster_city">
             <div class="wether_info_current_poster_city_location_date">

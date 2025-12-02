@@ -4,30 +4,16 @@ import {
   getwetherinfo,
   NotFoundError,
 } from "./getApiData.js";
-import { getCurrentWeatherElements, getErrorAccessingLocationElements } from "./getElements.js";
+import { getCurrentWeatherElements, getErrorElement, getSearchElemensts } from "./getElements.js";
 import { setWetherInfo } from "./setWeatherLogic.js";
-import { hideErrorAccessingLocationElement, hideWeatherInfoElements, showErrorAccessingLocationElement, showWeatherInfoElements } from "./showHideElements.js";
+import { hideErrorElement, hideWeatherInfoElements, showErrorElement, showWeatherInfoElements } from "./showHideElements.js";
 
-console.log('showWeatherInfoElements type:', typeof showWeatherInfoElements);
-console.log('hideErrorAccessingLocationElement type:', typeof hideErrorAccessingLocationElement);
-try {
-  showWeatherInfoElements();
-} catch (err) {
-  console.error('showWeatherInfoElements threw:', err);
-}
-try {
-  hideErrorAccessingLocationElement();
-} catch (err) {
-  console.error('hideErrorAccessingLocationElement threw:', err);
-}
 
 let weatherInfogotByUserSearch;
 
-const searchLocationBtnElement = document.getElementById("search_btn");
-const searchLocationSearchElement = document.getElementById("search_input");
-const SearchResultContainerElement = document.getElementById(
-  "search-container-result"
-);
+const searchLocationBtnElement = getSearchElemensts().searchLocationBtnElement;
+const searchLocationSearchElement = getSearchElemensts().searchLocationSearchElement;
+const SearchResultContainerElement = getSearchElemensts().SearchResultContainerElement;
 
 console.log("running searchlocationlogic.js");
 
@@ -40,6 +26,8 @@ const getResultOfSearch = async (e) => {
     } catch (error) {
       if (error instanceof NotFoundError) {
         showResult(error.message);
+      }else if(error instanceof TypeError){
+        showErrorElement("network access error")
       }
     }
   }
@@ -117,7 +105,7 @@ SearchResultContainerElement.addEventListener("click", async (e) => {
       );
       deleteResult();
       setWetherInfo(weatherInfogotByUserSearch, location);
-      hideErrorAccessingLocationElement();
+      hideErrorElement();
       showWeatherInfoElements();
       // SetLocation(cityName, countryName);
     } catch (error) {
@@ -147,11 +135,11 @@ searchLocationBtnElement.addEventListener('click', async (e)=> {
         setWetherInfo(weatherInfogotByUserSearch, location);
         // SetLocation(city, country);
         showWeatherInfoElements()
-        hideErrorAccessingLocationElement();
+        hideErrorElement();
       }else {
-        getErrorAccessingLocationElements().ErrorLocationMessage.innerText = "we couldn't find your city name, please try again ...";
+        getErrorElement().ErrorLocationMessage.innerText = "we couldn't find your city name, please try again ...";
         hideWeatherInfoElements();
-        showErrorAccessingLocationElement()
+        showErrorElement()
       }
     } catch (error) {
       if (error instanceof NotFoundError) {

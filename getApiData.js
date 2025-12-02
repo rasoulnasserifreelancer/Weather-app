@@ -171,11 +171,12 @@ export const getCurrentLonAndLatByCity = async (city) => {
     const latitudes = result?.results.map((result) => result.latitude);
     const longitudes = result?.results.map((result) => result.longitude);
     const contries = result?.results.map((result) => result.country);
-    if (!cities || !latitudes || !longitudes || !contries) {
+    if (cities.length === 0) {
       throw new NotFoundError("city not found");
     }
     return { cities, latitudes, longitudes, contries };
   } catch (error) {
-    throw err;
+    console.error(error)
+    throw error;
   }
 };

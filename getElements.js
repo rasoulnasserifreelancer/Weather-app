@@ -109,9 +109,9 @@ export const getHourlyWeatherElements = () => {
   };
 };
 
-export const getErrorAccessingLocationElements = () => {
+export const getErrorElement = () => {
   const ErrorLocationContainer = document.querySelector(
-    ".error-accessing-location"
+    ".error-element"
   );
   const ErrorLocationMessage = ErrorLocationContainer
     ? ErrorLocationContainer.querySelector("h2")
@@ -122,3 +122,15 @@ export const getErrorAccessingLocationElements = () => {
     ErrorLocationMessage,
   };
 };
+
+
+export const getSearchElemensts = () => {
+  const searchLocationBtnElement = document.getElementById("search_btn");
+const searchLocationSearchElement = document.getElementById("search_input");
+const SearchResultContainerElement = document.getElementById(
+  "search-container-result"
+);
+return {
+  searchLocationBtnElement, searchLocationSearchElement, SearchResultContainerElement
+}
+}
