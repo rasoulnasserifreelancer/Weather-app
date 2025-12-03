@@ -110,16 +110,18 @@ export const getHourlyWeatherElements = () => {
 };
 
 export const getErrorElement = () => {
-  const ErrorLocationContainer = document.querySelector(
+  const errorElement = document.querySelector(
     ".error-element"
   );
-  const ErrorLocationMessage = ErrorLocationContainer
-    ? ErrorLocationContainer.querySelector("h2")
+  const ErrorDialogLable = errorElement
+    ? errorElement.querySelector("h2")
     : null;
 
+  const ErrorBtn = document.querySelector('#close-error-btn img');
   return {
-    ErrorLocationContainer,
-    ErrorLocationMessage,
+    errorElement,
+    ErrorDialogLable,
+    ErrorBtn
   };
 };
 
@@ -134,3 +136,6 @@ return {
   searchLocationBtnElement, searchLocationSearchElement, SearchResultContainerElement
 }
 }
+
+
+export const mainContent = document.getElementById('main-content');

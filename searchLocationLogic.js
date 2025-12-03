@@ -137,7 +137,7 @@ searchLocationBtnElement.addEventListener('click', async (e)=> {
         showWeatherInfoElements()
         hideErrorElement();
       }else {
-        getErrorElement().ErrorLocationMessage.innerText = "we couldn't find your city name, please try again ...";
+        getErrorElement().ErrorDialogLable.innerText = "we couldn't find your city name, please try again ...";
         hideWeatherInfoElements();
         showErrorElement()
       }
