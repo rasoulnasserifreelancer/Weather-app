@@ -27,7 +27,7 @@ const getResultOfSearch = async (e) => {
       if (error instanceof NotFoundError) {
         showResult(error.message);
       }else if(error instanceof TypeError){
-        showErrorElement("network access error")
+        showErrorElement("network access error", "./assets/images/icon-retry");
       }
     }
   }
@@ -109,22 +109,27 @@ SearchResultContainerElement.addEventListener("click", async (e) => {
       showWeatherInfoElements();
       // SetLocation(cityName, countryName);
     } catch (error) {
-      console.log(error)
+      console.log(error);
+      if(error instanceof TypeError){
+        showErrorElement("network access error", "./assets/images/icon-retry");
+      }else {
+        showErrorElement(`${error.message}`, "./assets/images/icon-retry");
+      }
     }
   }
 });
 
-const SetLocation = (city, country) => {
-  getCurrentWeatherElements().locationElement.innerHTML = `${city}, ${country}`;
-};
+// const SetLocation = (city, country) => {
+//   getCurrentWeatherElements().locationElement.innerHTML = `${city}, ${country}`;
+// };
 
 
 searchLocationBtnElement.addEventListener('click', async (e)=> {
     const inputValue = searchLocationSearchElement.value;
     try {
       const result = await getCurrentLonAndLatByCity(inputValue);
-      const cityIndex = result?.cities.findIndex((city) => city.toLowerCase() === inputValue.toLowerCase());
-      if (cityIndex !== -1){
+      const cityIndex = result?.cities?.findIndex((city) => city.toLowerCase() === inputValue.toLowerCase());
+      if (result.cities || cityIndex !== -1){
         const city = result.cities[cityIndex];
         const country = result.contries[cityIndex];
         const location = {city, country}
@@ -135,15 +140,15 @@ searchLocationBtnElement.addEventListener('click', async (e)=> {
         setWetherInfo(weatherInfogotByUserSearch, location);
         // SetLocation(city, country);
         showWeatherInfoElements()
-        hideErrorElement();
+        // hideErrorElement();
       }else {
-        getErrorElement().ErrorDialogLable.innerText = "we couldn't find your city name, please try again ...";
+        // getErrorElement().ErrorDialogLable.innerText = "we couldn't find your city name, please try again ...";
         hideWeatherInfoElements();
-        showErrorElement()
+        showErrorElement("we couldn't find your city name, please try again ...", "https://img.icons8.com/neon/96/delete-sign.png")
       }
     } catch (error) {
       if (error instanceof NotFoundError) {
-        showResult(error.message);
+        showErrorElement(`${error.message}`, "./assets/images/icon-retry");
       }
     }
 })

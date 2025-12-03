@@ -107,7 +107,7 @@
   border-radius: 6px;
   transition: opacity 500ms linear;
   z-index: 100;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(256, 256, 256, 0.7);
 }
 
 .error-element-inside {
@@ -116,18 +116,27 @@
   padding: 1rem;
   border-radius: 8px;
   gap: 0.5rem;
-  background-color: rgba(100, 100, 100, 0.6);
+  box-shadow: 3px 3px 120px rgba(100, 100, 100, 0.7);
+  background-color: rgba(100, 100, 100, 0.7);
 }
 
 
-#close-error-btn{
+#close-error-btn img{
   color: rgb(206, 111, 111);
   font-weight: bold;
+  transition: all 1s linear;
 }
 
-#close-error-btn:hover{
+#close-error-btn img:focus{
   color: red;
-  transform: scale(1.1);
+  cursor: pointer;
+   transform: scale(1.1);
+}
+
+
+#close-error-btn img:hover{
+  color: red;
+  transform: translate(2px, 2px);
   cursor: pointer;
 }
 
