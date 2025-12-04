@@ -6,7 +6,7 @@ import {
 } from "./getApiData.js";
 import { getCurrentWeatherElements, getErrorElement, getSearchElemensts } from "./getElements.js";
 import { setWetherInfo } from "./setWeatherLogic.js";
-import { hideErrorElement, hideWeatherInfoElements, showErrorElement, showWeatherInfoElements } from "./showHideElements.js";
+import { hideErrorElement, hideWeatherInfoElements, showErrorElement, showWeatherInfoElements, showLocationSearchResult } from "./showHideElements.js";
 
 
 let weatherInfogotByUserSearch;
@@ -22,10 +22,10 @@ const getResultOfSearch = async (e) => {
     try {
       const result = await getCurrentLonAndLatByCity(e.target.value);
       console.log(result);
-      showResult(result);
+      showLocationSearchResult(result);
     } catch (error) {
       if (error instanceof NotFoundError) {
-        showResult(error.message);
+        showLocationSearchResult(error.message);
       }else if(error instanceof TypeError){
         showErrorElement("network access error", "./assets/images/icon-retry.svg");
       }
@@ -45,32 +45,28 @@ searchLocationSearchElement.addEventListener(
   callbacks.getResultOfSearch
 );
 
-const showResult = (result) => {
-  console.log("running show result");
-  console.log(typeof result);
-  const searchResult = document.createElement("div");
+// const showLocationSearchResult = (result) => {
+//   console.log("running show result");
+//   console.log(typeof result);
+//   const searchResult = document.createElement("div");
 
-  const searchContainerResult = document.getElementById(
-    "search-container-result"
-  );
+//   const searchContainerResult = document.getElementById(
+//     "search-container-result"
+//   );
 
-  searchContainerResult.innerHTML = "";
+//   searchContainerResult.innerHTML = "";
 
-  if (typeof result === "string") {
-    searchResult.innerHTML = `<p>${result}</p>`;
-  } else {
-    console.log(result.cities.map((name) => `<p>${name}</p>`).join("</br>"));
-    searchResult.innerHTML = result.cities
-      .map((name) => `<p>${name}</p>`)
-      .join(" ");
-    // Array.from(searchResult.children).map((elem, index) => {
-    //   elem.dataset.latitude = result.latitudes[index];
-    //   elem.dataset.longitude = result.longitudes[index];
-    // });
-    addPropertiesToPs(searchResult.children, result);
-  }
-  searchContainerResult.append(searchResult);
-};
+//   if (typeof result === "string") {
+//     searchResult.innerHTML = `<p>${result}</p>`;
+//   } else {
+//     console.log(result.cities.map((name) => `<p>${name}</p>`).join("</br>"));
+//     searchResult.innerHTML = result.cities
+//       .map((name) => `<p>${name}</p>`)
+//       .join(" ");
+//     addPropertiesToPs(searchResult.children, result);
+//   }
+//   searchContainerResult.append(searchResult);
+// };
 
 const deleteResult = () => {
   const searchContainerResult = document.getElementById(
@@ -80,18 +76,11 @@ const deleteResult = () => {
   searchContainerResult.innerHTML = "";
 };
 
-const addPropertiesToPs = (Searchcontainer, apiResponse) => {
-  Array.from(Searchcontainer).map((elem, index) => {
-    elem.dataset.latitude = apiResponse.latitudes[index];
-    elem.dataset.longitude = apiResponse.longitudes[index];
-    elem.dataset.city = apiResponse.cities[index];
-    elem.dataset.country = apiResponse.contries[index];
-  });
-};
+
 
 SearchResultContainerElement.addEventListener("click", async (e) => {
   console.log(typeof e.target.tagName);
-  console.log(e.target.tagName);
+  console.log(e.target.dataset);
   if (e.target.tagName == "P") {
     try {
       searchLocationSearchElement.value = e.target.textContent;
@@ -111,9 +100,9 @@ SearchResultContainerElement.addEventListener("click", async (e) => {
     } catch (error) {
       console.log(error);
       if(error instanceof TypeError){
-        showErrorElement("network access error", "./assets/images/icon-retry.svg");
+        showErrorElement("network access error", "../assets/images/icon-retry.svg");
       }else {
-        showErrorElement(`${error.message}`, "./assets/images/icon-retry.svg");
+        showErrorElement(`${error.message}`, "../assets/images/icon-retry.svg");
       }
     }
   }
@@ -148,11 +137,11 @@ searchLocationBtnElement.addEventListener('click', async (e)=> {
       }
     } catch (error) {
       if (error instanceof NotFoundError) {
-        showErrorElement(`${error.message}`, "./assets/images/icon-retry.svg");
+        showErrorElement(`${error.message}`, "../assets/images/icon-retry.svg");
       }else if(error instanceof TypeError){
-        showErrorElement("network access error", "./assets/images/icon-retry.svg");
+        showErrorElement("network access error", "../assets/images/icon-retry.svg");
       }else {
-        showErrorElement(`${error.message}`, "./assets/images/icon-retry.svg");
+        showErrorElement(`${error.message}`, "../assets/images/icon-retry.svg");
       }
     }
 })

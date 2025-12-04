@@ -137,5 +137,12 @@ return {
 }
 }
 
+export const getSearchLocationElements = () => {
+  const searchContainerResult = document.getElementById(
+    "search-container-result"
+  );
+  return {searchContainerResult}
+}
+
 
 export const mainContent = document.getElementById('main-content');

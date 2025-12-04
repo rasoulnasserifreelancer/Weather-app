@@ -6,7 +6,7 @@ import { getErrorElement } from "./getElements.js";
 
 import { getweatherInfoGotByUserLocation} from "./getLocationLogic.js";
 import { setWetherInfo } from "./setWeatherLogic.js";
-import { hideErrorElement, hideWeatherInfoElements, showErrorElement } from "./showHideElements.js";
+import { hideErrorElement, hideWeatherInfoElements, showErrorElement, hideLocationSearchResult } from "./showHideElements.js";
 
 
 
@@ -48,3 +48,5 @@ const setFallbackForLocation = (err) => {
 
 const setLoadingState = () => {};
 
+
+document.addEventListener('click', hideLocationSearchResult)

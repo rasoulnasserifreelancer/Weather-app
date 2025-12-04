@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="./styles/desktop/globalstyle.css" />
     <link rel="stylesheet" href="./styles/desktop/headerstyles.css" />
     <link rel="stylesheet" href="./styles/desktop/mainstyle.css" />
+    <link rel="stylesheet" href="./styles/desktop/errorStyle.css" />
     <script src="./src/app.js" type="module" defer></script>
     <script src="./src/getApiData.js" type="module" defer></script>
     <script src="./src/getElements.js" type="module" defer></script>
@@ -29,19 +30,27 @@
     <script src="./src/setWeatherLogic.js" type="module" defer></script>
     <script src="./src/showHideElements.js" type="module" defer></script>
     <script src="./src/searchLocationLogic.js" type="module" defer></script>
+    <script src="./src/utils.js" type="module" defer></script>
     <title>Frontend Mentor | Weather app</title>
   </head>
   <body>
-        <div class="error-element" id="backdrop">
-        <div class="error-element-inside" aria-modal="true" role="dialog" aria-labelledby="dialog-lable">
-          <h2 id="dialog-lable"></h2>
-          <div id="close-error-btn"><img role="button" tabindex="0" width="50" height="50"/></div>
+    <div class="error-element" id="backdrop">
+      <div
+        class="error-element-inside"
+        aria-modal="true"
+        role="dialog"
+        aria-labelledby="dialog-lable"
+      >
+        <h2 id="dialog-lable"></h2>
+        <div id="close-error-btn">
+          <img role="button" tabindex="0" width="50" height="50" />
         </div>
       </div>
+    </div>
     <header>
       <div id="logo">
         <a href="/">
-          <img src="./assets/images/logo.svg" alt="Weather app logo"/>
+          <img src="./assets/images/logo.svg" alt="Weather app logo" />
         </a>
       </div>
       <div id="dropdown">
@@ -122,9 +131,9 @@
               <div
                 class="wether_info_current_poster_city_location_degree_icon_icon"
               >
-                <img src="./assets/images/icon-sunny.webp" alt="" />
+                <img src="../assets/images/icon-sunny.webp" alt="" />
               </div>
-              <span id="deg">20&deg;</span>
+              <span><span id="deg">20</span><sup>°</sup></span>
             </div>
           </div>
           <div class="wether_info_current_detail">
@@ -196,7 +205,7 @@
             <div class="wether_info__daily_forecast_day">
               <p>Sat</p>
               <div class="wether_info__daily_forecast_day_icon">
-                <img src="./assets/images/icon-sunny.webp" alt="" />
+                <img src="../assets/images/icon-sunny.webp" alt="" />
               </div>
               <div class="wether_info__daily_forecast_day_minmax">
                 <span><span class="min">18</span>&deg;</span>
@@ -206,7 +215,7 @@
             <div class="wether_info__daily_forecast_day">
               <p>Sun</p>
               <div class="wether_info__daily_forecast_day_icon">
-                <img src="./assets/images/icon-sunny.webp" alt="" />
+                <img src="../assets/images/icon-sunny.webp" alt="" />
               </div>
               <div class="wether_info__daily_forecast_day_minmax">
                 <span><span class="min">18</span>&deg;</span>
@@ -216,7 +225,7 @@
             <div class="wether_info__daily_forecast_day">
               <p>Mon</p>
               <div class="wether_info__daily_forecast_day_icon">
-                <img src="./assets/images/icon-sunny.webp" alt="" />
+                <img src="../assets/images/icon-sunny.webp" alt="" />
               </div>
               <div class="wether_info__daily_forecast_day_minmax">
                 <span><span class="min">18</span>&deg;</span>
@@ -242,7 +251,7 @@
             <div class="wether_info__hourly_detail_day">
               <div class="wether_info__hourly_detail_day-condition">
                 <div class="wether_info__hourly_detail_day-condition-icon">
-                  <img src="./assets/images/icon-sunny.webp" alt="" />
+                  <img src="../assets/images/icon-sunny.webp" alt="" />
                 </div>
                 <p>3 PM</p>
               </div>
@@ -254,7 +263,7 @@
             <div class="wether_info__hourly_detail_day">
               <div class="wether_info__hourly_detail_day-condition">
                 <div class="wether_info__hourly_detail_day-condition-icon">
-                  <img src="./assets/images/icon-sunny.webp" alt="" />
+                  <img src="../assets/images/icon-sunny.webp" alt="" />
                 </div>
                 <p>4 PM</p>
               </div>
@@ -266,7 +275,7 @@
             <div class="wether_info__hourly_detail_day">
               <div class="wether_info__hourly_detail_day-condition">
                 <div class="wether_info__hourly_detail_day-condition-icon">
-                  <img src="./assets/images/icon-sunny.webp" alt="" />
+                  <img src="../assets/images/icon-sunny.webp" alt="" />
                 </div>
                 <p>5 PM</p>
               </div>
@@ -278,7 +287,7 @@
             <div class="wether_info__hourly_detail_day">
               <div class="wether_info__hourly_detail_day-condition">
                 <div class="wether_info__hourly_detail_day-condition-icon">
-                  <img src="./assets/images/icon-sunny.webp" alt="" />
+                  <img src="../assets/images/icon-sunny.webp" alt="" />
                 </div>
                 <p>6 PM</p>
               </div>
@@ -290,7 +299,7 @@
             <div class="wether_info__hourly_detail_day">
               <div class="wether_info__hourly_detail_day-condition">
                 <div class="wether_info__hourly_detail_day-condition-icon">
-                  <img src="./assets/images/icon-sunny.webp" alt="" />
+                  <img src="../assets/images/icon-sunny.webp" alt="" />
                 </div>
                 <p>7 PM</p>
               </div>
@@ -302,7 +311,7 @@
             <div class="wether_info__hourly_detail_day">
               <div class="wether_info__hourly_detail_day-condition">
                 <div class="wether_info__hourly_detail_day-condition-icon">
-                  <img src="./assets/images/icon-sunny.webp" alt="" />
+                  <img src="../assets/images/icon-sunny.webp" alt="" />
                 </div>
                 <p>8 PM</p>
               </div>
@@ -314,7 +323,7 @@
             <div class="wether_info__hourly_detail_day">
               <div class="wether_info__hourly_detail_day-condition">
                 <div class="wether_info__hourly_detail_day-condition-icon">
-                  <img src="./assets/images/icon-sunny.webp" alt="" />
+                  <img src="../assets/images/icon-sunny.webp" alt="" />
                 </div>
                 <p>9 PM</p>
               </div>
@@ -326,7 +335,7 @@
             <div class="wether_info__hourly_detail_day">
               <div class="wether_info__hourly_detail_day-condition">
                 <div class="wether_info__hourly_detail_day-condition-icon">
-                  <img src="./assets/images/icon-sunny.webp" alt="" />
+                  <img src="../assets/images/icon-sunny.webp" alt="" />
                 </div>
                 <p>10 PM</p>
               </div>

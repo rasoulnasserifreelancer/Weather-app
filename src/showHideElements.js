@@ -1,4 +1,5 @@
-import { getCurrentWeatherElements, getDailyWeatherElements, getErrorElement, getHourlyWeatherElements, mainContent } from "./getElements.js";
+import { getCurrentWeatherElements, getDailyWeatherElements, getErrorElement, getHourlyWeatherElements, mainContent, getSearchLocationElements, getSearchElemensts } from "./getElements.js";
+import { addPropertiesToPs } from "./utils.js";
 
 export const hideWeatherInfoElements = () => {
   getCurrentWeatherElements().CurrentWeatherElement.style.display = "none";
@@ -39,3 +40,32 @@ export const showDailyElement = (element) => {
 export const hideDailyElement = (element) => {
   element.style.display = "none";
 };
+
+
+export const showLocationSearchResult = (result) => {
+  const searchResult = document.createElement("div");
+  const SearchResultContainerElement = getSearchElemensts().SearchResultContainerElement;
+  
+  SearchResultContainerElement.innerHTML = "";
+
+  if (typeof result === "string") {
+    searchResult.innerHTML = `<p>${result}</p>`;
+  } else {
+    console.log(result.cities.map((name) => `<p>${name}</p>`).join("</br>"));
+    searchResult.innerHTML = result.cities
+      .map((name) => `<p>${name}</p>`)
+      .join(" ");
+    addPropertiesToPs(searchResult.children, result);
+  }
+  SearchResultContainerElement.append(searchResult);
+};
+
+
+
+export const hideLocationSearchResult = (e) => {
+  console.log(e.target);
+  const searchContainerResult =  getSearchLocationElements().searchContainerResult; 
+  if (e.target !== searchContainerResult && e.target.parentNode !== searchContainerResult) {
+    searchContainerResult.innerHTML = '';
+  }
+}

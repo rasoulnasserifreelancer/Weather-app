@@ -1,11 +1,11 @@
-const sunnySky = "./assets/images/icon-sunny.webp";
-const partlycloudySky = "./assets/images/icon-partly-cloudy.webp";
-const overcastSky = "./assets/images/icon-overcast.webp";
-const snowySky = "./assets/images/icon-snow.webp";
-const rainySky = "./assets/images/icon-rain.webp";
-const stormSky = "./assets/images/icon-storm.webp";
-const fogySky = "./assets/images/icon-fog.webp";
-const drizzleSky = "./assets/images/icon-drizzle.webp";
+const sunnySky = "../assets/images/icon-sunny.webp";
+const partlycloudySky = "../assets/images/icon-partly-cloudy.webp";
+const overcastSky = "../assets/images/icon-overcast.webp";
+const snowySky = "../assets/images/icon-snow.webp";
+const rainySky = "../assets/images/icon-rain.webp";
+const stormSky = "../assets/images/icon-storm.webp";
+const fogySky = "../assets/images/icon-fog.webp";
+const drizzleSky = "../assets/images/icon-drizzle.webp";
 
 console.log("running getapidata.js");
 
