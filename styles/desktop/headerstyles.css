@@ -1,15 +1,14 @@
 
-
 header {
   display: flex;
   justify-content: space-between;
-  margin: 1% 10%;
+  margin: 2.5% auto;
+  width: 80%;
+  height: 5%;
 }
 
 #dropdown {
   display: flex;
-  /* padding: 1%; */
-  /* flex-direction: column; */
   position: relative;
 }
 

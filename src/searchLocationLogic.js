@@ -27,7 +27,7 @@ const getResultOfSearch = async (e) => {
       if (error instanceof NotFoundError) {
         showResult(error.message);
       }else if(error instanceof TypeError){
-        showErrorElement("network access error", "./assets/images/icon-retry");
+        showErrorElement("network access error", "./assets/images/icon-retry.svg");
       }
     }
   }
@@ -111,9 +111,9 @@ SearchResultContainerElement.addEventListener("click", async (e) => {
     } catch (error) {
       console.log(error);
       if(error instanceof TypeError){
-        showErrorElement("network access error", "./assets/images/icon-retry");
+        showErrorElement("network access error", "./assets/images/icon-retry.svg");
       }else {
-        showErrorElement(`${error.message}`, "./assets/images/icon-retry");
+        showErrorElement(`${error.message}`, "./assets/images/icon-retry.svg");
       }
     }
   }
@@ -148,7 +148,11 @@ searchLocationBtnElement.addEventListener('click', async (e)=> {
       }
     } catch (error) {
       if (error instanceof NotFoundError) {
-        showErrorElement(`${error.message}`, "./assets/images/icon-retry");
+        showErrorElement(`${error.message}`, "./assets/images/icon-retry.svg");
+      }else if(error instanceof TypeError){
+        showErrorElement("network access error", "./assets/images/icon-retry.svg");
+      }else {
+        showErrorElement(`${error.message}`, "./assets/images/icon-retry.svg");
       }
     }
 })

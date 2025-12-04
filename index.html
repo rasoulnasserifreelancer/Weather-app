@@ -17,31 +17,31 @@
       href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./globalstyle.css" />
-    <link rel="stylesheet" href="./headerstyles.css" />
-    <link rel="stylesheet" href="./mainstyle.css" />
-    <script src="./app.js" type="module" defer></script>
-    <script src="./getApiData.js" type="module" defer></script>
-    <script src="./getElements.js" type="module" defer></script>
-    <script src="./searchLocationLogic.js" type="module" defer></script>
-    <script src="./getLocationLogic.js" type="module" defer></script>
-    <script src="./changeDayLogic.js" type="module" defer></script>
-    <script src="./setWeatherLogic.js" type="module" defer></script>
-    <script src="showHideElements.js" type="module" defer></script>
-    <script src="searchLocationLogic.js" type="module" defer></script>
+    <link rel="stylesheet" href="./styles/desktop/globalstyle.css" />
+    <link rel="stylesheet" href="./styles/desktop/headerstyles.css" />
+    <link rel="stylesheet" href="./styles/desktop/mainstyle.css" />
+    <script src="./src/app.js" type="module" defer></script>
+    <script src="./src/getApiData.js" type="module" defer></script>
+    <script src="./src/getElements.js" type="module" defer></script>
+    <script src="./src/searchLocationLogic.js" type="module" defer></script>
+    <script src="./src/getLocationLogic.js" type="module" defer></script>
+    <script src="./src/changeDayLogic.js" type="module" defer></script>
+    <script src="./src/setWeatherLogic.js" type="module" defer></script>
+    <script src="./src/showHideElements.js" type="module" defer></script>
+    <script src="./src/searchLocationLogic.js" type="module" defer></script>
     <title>Frontend Mentor | Weather app</title>
   </head>
   <body>
         <div class="error-element" id="backdrop">
         <div class="error-element-inside" aria-modal="true" role="dialog" aria-labelledby="dialog-lable">
           <h2 id="dialog-lable"></h2>
-          <div id="close-error-btn"><img role="button" tabindex="0" width="96" height="96"/></div>
+          <div id="close-error-btn"><img role="button" tabindex="0" width="50" height="50"/></div>
         </div>
       </div>
     <header>
       <div id="logo">
         <a href="/">
-          <img src="./assets/images/logo.svg" alt="Weather app logo" />
+          <img src="./assets/images/logo.svg" alt="Weather app logo"/>
         </a>
       </div>
       <div id="dropdown">
@@ -89,8 +89,6 @@
     </header>
 
     <main id="main-content">
-
-
       <section id="hero-section" class="hero-content">
         <h1>How's the sky looking today?</h1>
         <div id="search-container">

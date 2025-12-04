@@ -167,11 +167,11 @@ export const getCurrentLonAndLatByCity = async (city) => {
       `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=4&language=en&format=json`
     );
     const result = await response.json();
-    const cities = result?.results.map((result) => result.name);
-    const latitudes = result?.results.map((result) => result.latitude);
-    const longitudes = result?.results.map((result) => result.longitude);
-    const contries = result?.results.map((result) => result.country);
-    if (cities.length === 0) {
+    const cities = result?.results?.map((result) => result.name);
+    const latitudes = result?.results?.map((result) => result.latitude);
+    const longitudes = result?.results?.map((result) => result.longitude);
+    const contries = result?.results?.map((result) => result.country);
+    if (!cities || cities.length === 0) {
       throw new NotFoundError("city not found");
     }
     return { cities, latitudes, longitudes, contries };
