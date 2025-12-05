@@ -82,7 +82,7 @@ const setHourlyWetherTitle = (res) => {
 
 export const setHourlyWetherInfo = (res) => {
   const allDaysElements = getHourlyWeatherElements().allDaysElements;
-
+  const hourlyDetailContainer = getHourlyWeatherElements().HourlyDetailContainer;
   const weekDayMap = {
     Sunday: "Sun",
     Monday: "Mon",
@@ -108,7 +108,7 @@ export const setHourlyWetherInfo = (res) => {
   for (let i = 0; i < 168; i++) {
     if (
       new Date(res.hourly.time[i]).toString().split(" ")[0] == theDay &&
-      theDayDailyInfo.length < 8 &&
+      // theDayDailyInfo.length < 16 &&
       new Date(res.hourly.time[i]) > new Date()
     ) {
       theDayDailyInfo.push({
@@ -119,6 +119,22 @@ export const setHourlyWetherInfo = (res) => {
     }
   }
 
+
+
+  theDayDailyInfo.filter(({time, temp, code})=> time && temp && code).forEach(({time, temp, code}) => {
+    hourlyDetailContainer.insertAdjacentHTML('afterbegin', `            <div class="wether_info__hourly_detail_day">
+              <div class="wether_info__hourly_detail_day-condition">
+                <div class="wether_info__hourly_detail_day-condition-icon">
+                  <img src=${matchWetherCodeToIcon(code)} alt="" />
+                </div>
+                <p>${time.replaceAll(":00", "")}</p>
+              </div>
+              <div class="wether_info__hourly_detail_day-condition_temp">
+                <span> <span class="temp">${temp}</span>&deg; </span>
+              </div>
+            </div>`)
+  })
+
   getHourlyWeatherElements().HourlyDayElements.forEach((element, index) => {
     if (index >= theDayDailyInfo.length) {
       hideDailyElement(element);
@@ -126,6 +142,7 @@ export const setHourlyWetherInfo = (res) => {
       showDailyElement(element);
     }
   });
+
 
   console.log(theDayDailyInfo);
 
