@@ -1,20 +1,23 @@
 // import { getCurrentWeather } from "./getApiData";
-import { getCurrentWeatherElements, getDailyWeatherElements } from "./getElements.js";
-
+import {
+  getCurrentWeatherElements,
+  getDailyWeatherElements,
+  getHourlyWeatherElements,
+} from "./getElements.js";
 
 export const setLoadingState = () => {
-    addLoadingStateToCurrentWeatherPosterElement();
-    addLoadingStateTocurrentWeatherDetailAPIInformationElement();
-    addLoadingStateToDayElements();
+  addLoadingStateToCurrentWeatherPosterElement();
+  addLoadingStateTocurrentWeatherDetailAPIInformationElement();
+  addLoadingStateToDayElements();
+  addLoadingStateToHourlyElements();
 };
 
-
 export const removeLoadingState = () => {
-    removeLoadingStateOfCurrentWeatherPosterElement();
-    removeLoadingStateOfcurrentWeatherDetailAPIInformationElement();
-    removeLoadingStateOfDayElements();
-}
-
+  removeLoadingStateOfCurrentWeatherPosterElement();
+  removeLoadingStateOfcurrentWeatherDetailAPIInformationElement();
+  removeLoadingStateOfDayElements();
+  removeLoadingStateOfHourlyElements();
+};
 
 const addLoadingStateToCurrentWeatherPosterElement = () => {
   const currentWeatherPosterElement =
@@ -24,7 +27,6 @@ const addLoadingStateToCurrentWeatherPosterElement = () => {
 
   currentWeatherPosterElement.classList.add("loading");
 };
-
 
 const removeLoadingStateOfCurrentWeatherPosterElement = () => {
   const currentWeatherPosterElement =
@@ -45,18 +47,13 @@ const removeLoadingStateOfCurrentWeatherPosterElement = () => {
   currentWeatherPosterElement.classList.remove("loading");
 };
 
-
 const addLoadingStateTocurrentWeatherDetailAPIInformationElement = () => {
   const currentWeatherDetailAPIInformationElement =
     getCurrentWeatherElements().currentWeatherDetailAPIInformationElement;
-    currentWeatherDetailAPIInformationElement.forEach(
-    (element) =>{
-            (element.innerHTML = "-")
-
-    }
-  );
+  currentWeatherDetailAPIInformationElement.forEach((element) => {
+    element.innerHTML = "-";
+  });
 };
-
 
 const removeLoadingStateOfcurrentWeatherDetailAPIInformationElement = () => {
   const currentWeatherDetailAPIInformationElement =
@@ -64,30 +61,24 @@ const removeLoadingStateOfcurrentWeatherDetailAPIInformationElement = () => {
   currentWeatherDetailAPIInformationElement.forEach((element, index) => {
     switch (index) {
       case 0:
-        element.innerHTML = 
-       `<span>
+        element.innerHTML = `<span>
             <span id="apparent-temp"></span>&deg;
-          </span>`
+          </span>`;
         break;
       case 1:
-        element.innerHTML = 
-        `  <span>
+        element.innerHTML = `  <span>
             <span id="humidity"></span>%
-          </span>`
+          </span>`;
         break;
       case 2:
-        element.innerHTML = (
-         ` <span>
+        element.innerHTML = ` <span>
             <span id="wind"></span> km/h
-          </span>`
-        );
+          </span>`;
         break;
       case 3:
-        element.innerHTML = (
-          `<span>
+        element.innerHTML = `<span>
             <span id="precipitation"></span> mm
-          </span>`
-        );
+          </span>`;
         break;
       default:
         break;
@@ -95,23 +86,56 @@ const removeLoadingStateOfcurrentWeatherDetailAPIInformationElement = () => {
   });
 };
 
-
 const addLoadingStateToDayElements = () => {
-    const dayElements = getDailyWeatherElements().DayElements;
-    dayElements.forEach((day)=> day.innerHTML = '');   
-}
-
+  const dayElements = getDailyWeatherElements().DayElements;
+  dayElements.forEach((day) => (day.innerHTML = ""));
+};
 
 const removeLoadingStateOfDayElements = () => {
-    const dayElements = getDailyWeatherElements().DayElements;
-    dayElements.forEach((day)=> day.innerHTML = 
-`              <p></p>
+  const dayElements = getDailyWeatherElements().DayElements;
+  dayElements.forEach(
+    (day) =>
+      (day.innerHTML = `              <p></p>
               <div class="wether_info__daily_forecast_day_icon">
                 <img src="" alt="" />
               </div>
               <div class="wether_info__daily_forecast_day_minmax">
                 <span><span class="min"></span>&deg;</span>
                 <span><span class="max"></span>&deg;</span>
-              </div>`
-);   
-}
+              </div>`)
+  );
+};
+
+const addLoadingStateToHourlyElements = () => {
+  const currentDayElement = getHourlyWeatherElements().CurrentDayElement;
+  currentDayElement.innerHTML = `<option value="-">-</option>`;
+  const hourlyDayElements = getHourlyWeatherElements().HourlyDayElements;
+  hourlyDayElements.forEach((day) => (day.innerHTML = ""));
+};
+
+const removeLoadingStateOfHourlyElements = () => {
+  const currentDayElement = getHourlyWeatherElements().CurrentDayElement;
+  currentDayElement.innerHTML = `
+              <option value=""></option>
+              <option value=""></option>
+              <option value=""></option>
+              <option value=""></option>
+              <option value=""></option>
+              <option value=""></option>
+              <option value=""></option>`;
+  const hourlyDayElements = getHourlyWeatherElements().HourlyDayElements;
+  hourlyDayElements.forEach(
+    (day) =>
+      (day.innerHTML = `
+                 <div class="wether_info__hourly_detail_day-condition">
+                <div class="wether_info__hourly_detail_day-condition-icon">
+                  <img src="" alt="" />
+                </div>
+                <p></p>
+              </div>
+              <div class="wether_info__hourly_detail_day-condition_temp">
+                <span> <span class="temp"></span>&deg; </span>
+              </div>
+                `)
+  );
+};
