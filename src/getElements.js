@@ -6,6 +6,11 @@ export const getCurrentWeatherElements = () => {
   const CurrentWeatherDetailElement = document.querySelector(
     ".wether_info_current_detail"
   );
+
+  const currentWeatherDetailAPIInformationElement = document.querySelectorAll(
+    ".wether_info_current_detail > * > *:last-child"
+  );
+
   const poster_weather_city_icon = document.querySelector(
     ".wether_info_current_poster_city_location_degree_icon_icon img"
   );
@@ -21,6 +26,7 @@ export const getCurrentWeatherElements = () => {
     CurrentWeatherElement,
     CurrentWeatherPosterElement,
     CurrentWeatherDetailElement,
+    currentWeatherDetailAPIInformationElement,
     poster_weather_city_icon,
     locationElement,
     dateElement,

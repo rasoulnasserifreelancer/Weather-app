@@ -5,11 +5,12 @@ import { getErrorElement } from "./getElements.js";
 
 
 import { getweatherInfoGotByUserLocation} from "./getLocationLogic.js";
+import { removeLoadingState, setLoadingState } from "./loading.js";
 import { setWetherInfo } from "./setWeatherLogic.js";
 import { hideErrorElement, hideWeatherInfoElements, showErrorElement, hideLocationSearchResult } from "./showHideElements.js";
 
 
-
+setLoadingState()
 
 window.onload = () => {
   navigator.geolocation.getCurrentPosition(
@@ -22,6 +23,7 @@ export const setPsitionCallbck = async (pos) => {
   let currentLatitude = pos.coords.latitude;
   let currentLlongitude = pos.coords.longitude;
   let currentLocation;
+  removeLoadingState()
   hideErrorElement();
   try {
     currentLocation = await getCurrentCityByLonAndLat(
@@ -44,9 +46,6 @@ const setFallbackForLocation = (err) => {
   hideWeatherInfoElements();
   showErrorElement("We Couldn't access your location, please try searching for your location", "https://img.icons8.com/neon/96/delete-sign.png");
 };
-
-
-const setLoadingState = () => {};
 
 
 document.addEventListener('click', hideLocationSearchResult)

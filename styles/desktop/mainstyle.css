@@ -139,6 +139,38 @@
   height: 70%;
 }
 
+.wether_info_current_poster_city.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.6rem;
+  justify-content: center;
+  background-image: none;
+  background-color: var(--Neutral600);
+  
+}
+
+.wether_info_current_poster_city.loading img {
+  animation-name: rotateScale;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rotateScale {
+  from {
+    transform: rotateZ(0deg) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: rotateZ(360deg) scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+
+
+
 .wether_info_current_poster_city_location_date {
   display: flex;
   flex-direction: column;
