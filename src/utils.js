@@ -6,3 +6,14 @@ export const addPropertiesToPs = (Searchcontainer, apiResponse) => {
     elem.dataset.country = apiResponse.contries[index];
   });
 };
+
+
+export const getAllNodes = (element, allNodes) => {
+  for (let node of element.childNodes) {
+    allNodes.push(node);
+    if (node.childNodes.length > 0) {
+      allNodes = getAllNodes(node, allNodes);
+    }
+  }
+  return allNodes
+}

@@ -1,13 +1,14 @@
 import {
   getCurrentCityByLonAndLat,
 } from "./getApiData.js";
-import { getErrorElement } from "./getElements.js";
+import { getDropdownElements, getErrorElement } from "./getElements.js";
 
 
 import { getweatherInfoGotByUserLocation} from "./getLocationLogic.js";
 import { removeLoadingState, setLoadingState } from "./loading.js";
 import { setWetherInfo } from "./setWeatherLogic.js";
-import { hideErrorElement, hideWeatherInfoElements, showErrorElement, hideLocationSearchResult } from "./showHideElements.js";
+import { hideErrorElement, hideWeatherInfoElements, showErrorElement, hideLocationSearchResult, hideUnitDropDown } from "./showHideElements.js";
+import { getAllNodes } from "./utils.js";
 
 
 setLoadingState()
@@ -49,4 +50,25 @@ const setFallbackForLocation = (err) => {
 };
 
 
-document.addEventListener('click', hideLocationSearchResult)
+const hideUnitDropDownOnClick = (e) => {
+    const dropdown = getDropdownElements().dropdown;
+    const allNodes = getAllNodes(dropdown, []);
+    console.log(allNodes.includes(e.target))
+    if (!allNodes.includes(e.target)) {
+      hideUnitDropDown()
+    } 
+}
+
+const documentClickEventCallBacks = {
+  handleEvent : (e) => {
+    hideLocationSearchResult(e);
+    hideUnitDropDownOnClick(e);
+  }
+
+}
+
+
+document.addEventListener('click', documentClickEventCallBacks)
+
+
+

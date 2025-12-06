@@ -1,4 +1,4 @@
-import { getCurrentWeatherElements, getDailyWeatherElements, getErrorElement, getHourlyWeatherElements, mainContent, getSearchLocationElements, getSearchElemensts } from "./getElements.js";
+import { getCurrentWeatherElements, getDailyWeatherElements, getErrorElement, getHourlyWeatherElements, mainContent, getSearchLocationElements, getSearchElemensts, getDropdownElements } from "./getElements.js";
 import { addPropertiesToPs } from "./utils.js";
 
 export const hideWeatherInfoElements = () => {
@@ -68,4 +68,15 @@ export const hideLocationSearchResult = (e) => {
   if (e.target !== searchContainerResult && e.target.parentNode !== searchContainerResult) {
     searchContainerResult.innerHTML = '';
   }
+}
+
+
+export const showUnitDropDown = () => {
+  const dropdownUnitList = getDropdownElements().dropdownUnitList;
+  dropdownUnitList.classList.add('show');
+}
+export const hideUnitDropDown = () => {
+  const dropdownUnitList = getDropdownElements().dropdownUnitList;
+    dropdownUnitList.classList.remove('show');
+
 }
