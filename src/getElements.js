@@ -20,6 +20,8 @@ export const getCurrentWeatherElements = () => {
   const apparentTemp = document.getElementById("apparent-temp");
   const humidityElement = document.getElementById("humidity");
   const windElement = document.getElementById("wind");
+  console.log(windElement);
+  const windElementUnit = windElement?.nextSibling;
   const precipitationElement = document.getElementById("precipitation");
 
   return {
@@ -34,6 +36,7 @@ export const getCurrentWeatherElements = () => {
     apparentTemp,
     humidityElement,
     windElement,
+    windElementUnit,
     precipitationElement,
   };
 };
@@ -176,7 +179,7 @@ export const getDropdownElements = () => {
   // All unit list items
   const unitItems = document.querySelectorAll(".unit");
 
-  const checkMarkIcon = document.querySelector(".unit img");
+  const checkMarkIcons = document.querySelectorAll(".unit img");
   return {
     dropdown,
     iconDropdown,
@@ -190,7 +193,7 @@ export const getDropdownElements = () => {
     precipitationIn,
     unitTitles,
     unitItems,
-    checkMarkIcon
+    checkMarkIcons
   };
 };
 

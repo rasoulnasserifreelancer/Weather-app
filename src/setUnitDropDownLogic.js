@@ -1,4 +1,4 @@
-import { celsiusToFahrenheit, fahrenheitToCelsius } from "./changeUnitLogic.js";
+import { celsiusToFahrenheit, fahrenheitToCelsius, kmhToMph, mphToKmh } from "./changeUnitLogic.js";
 import {
   getCurrentWeatherElements,
   getDailyWeatherElements,
@@ -16,7 +16,7 @@ const precipitationMm = getDropdownElements().precipitationMm;
 const precipitationIn = getDropdownElements().precipitationIn;
 const windspeedKmh = getDropdownElements().windspeedKmh;
 const windspeedMph = getDropdownElements().windspeedMph;
-const checkMarkIcon = getDropdownElements().checkMarkIcon;
+const checkMarkIcons = getDropdownElements().checkMarkIcons;
 
 const changeTempToFarForAllElements = () => {
   const degElement = getCurrentWeatherElements().degElement;
@@ -56,8 +56,26 @@ const changeTempToCelForAllElements = () => {
   );
 };
 
-const addSelectedIconAndClass = (element) => {
-  element.append(checkMarkIcon);
+const changeWindSpeedToKmhForAllElements = () => {
+    const windElement = getCurrentWeatherElements().windElement;
+    const windElementUnit = getCurrentWeatherElements().windElementUnit;
+
+    windElement.innerText = mphToKmh(windElement.innerText);
+    windElementUnit.nodeValue = 'Km/h';
+}
+
+
+const changeWindSpeedToMphForAllElements = () => {
+        const windElement = getCurrentWeatherElements().windElement;
+        const windElementUnit = getCurrentWeatherElements().windElementUnit;
+
+        windElement.innerText = kmhToMph(windElement.innerText);
+        windElementUnit.nodeValue = 'Mph';
+}
+
+
+const addSelectedIconAndClass = (element, i) => {
+  element.append(checkMarkIcons[i]);
   element.classList.add("selected");
 };
 
@@ -68,19 +86,37 @@ const dropdownCallbacks = (e) => {
     e.target.parentElement === temperatureCel)
   ) {
     changeTempToCelForAllElements();
-    addSelectedIconAndClass(temperatureCel);
+    addSelectedIconAndClass(temperatureCel, 0);
     temperatureFar.classList.remove("selected");
   } else if (
     !temperatureFar.classList.contains("selected") &&
       (e.target === temperatureFar ||
     e.target.parentElement === temperatureFar)
   ) {
-    console.log("far has selected",temperatureFar.classList.contains("selected"))
     changeTempToFarForAllElements();
-    addSelectedIconAndClass(temperatureFar);
+    addSelectedIconAndClass(temperatureFar, 0);
     temperatureCel.classList.remove("selected");
+  }else if (
+    !windspeedKmh.classList.contains("selected") &&
+      (e.target === windspeedKmh ||
+    e.target.parentElement === windspeedKmh)
+  ) {
+    changeWindSpeedToKmhForAllElements();
+    addSelectedIconAndClass(windspeedKmh, 1);
+    windspeedMph.classList.remove("selected");
+  }else if (
+    !windspeedMph.classList.contains("selected") &&
+      (e.target === windspeedMph ||
+    e.target.parentElement === windspeedMph)
+  ) {
+    changeWindSpeedToMphForAllElements();
+    addSelectedIconAndClass(windspeedMph, 1);
+    windspeedKmh.classList.remove("selected");
   }
 };
+
+
+
 
 iconDropdown.addEventListener("click", showUnitDropDown);
 dropdownContainer.addEventListener("click", dropdownCallbacks);
