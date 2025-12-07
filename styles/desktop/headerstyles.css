@@ -15,6 +15,13 @@ header {
 
 #system {
   font-size: 1rem;
+  transition: transform 300ms linear;
+}
+
+
+#system:hover {
+ cursor: pointer;
+ transform: scale(1.1);
 }
 
 #logo {
@@ -39,6 +46,11 @@ header {
   border-radius: 8px;
   background-color: var(--Neutral700);
 }
+
+#icon-dropdown:hover {
+  cursor: pointer;
+}
+
 
 #dropdown-unit {
   display: flex;

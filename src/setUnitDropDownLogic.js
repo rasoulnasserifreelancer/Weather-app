@@ -1,4 +1,11 @@
-import { celsiusToFahrenheit, fahrenheitToCelsius, inchToMm, kmhToMph, mmToInch, mphToKmh } from "./changeUnitLogic.js";
+import {
+  celsiusToFahrenheit,
+  fahrenheitToCelsius,
+  inchToMm,
+  kmhToMph,
+  mmToInch,
+  mphToKmh,
+} from "./changeUnitLogic.js";
 import {
   getCurrentWeatherElements,
   getDailyWeatherElements,
@@ -57,99 +64,128 @@ const changeTempToCelForAllElements = () => {
 };
 
 const changeWindSpeedToKmhForAllElements = () => {
-    const windElement = getCurrentWeatherElements().windElement;
-    const windElementUnit = getCurrentWeatherElements().windElementUnit;
+  const windElement = getCurrentWeatherElements().windElement;
+  const windElementUnit = getCurrentWeatherElements().windElementUnit;
 
-    windElement.innerText = mphToKmh(windElement.innerText);
-    windElementUnit.nodeValue = 'Km/h';
-}
-
+  windElement.innerText = mphToKmh(windElement.innerText);
+  windElementUnit.nodeValue = " Km/h";
+};
 
 const changeWindSpeedToMphForAllElements = () => {
-        const windElement = getCurrentWeatherElements().windElement;
-        const windElementUnit = getCurrentWeatherElements().windElementUnit;
+  const windElement = getCurrentWeatherElements().windElement;
+  const windElementUnit = getCurrentWeatherElements().windElementUnit;
 
-        windElement.innerText = kmhToMph(windElement.innerText);
-        windElementUnit.nodeValue = 'Mph';
-}
-
+  windElement.innerText = kmhToMph(windElement.innerText);
+  windElementUnit.nodeValue = " Mph";
+};
 
 const changeprecipitationFromMmToInch = () => {
-    const precipitation = getCurrentWeatherElements().precipitationElement;
-    const precipitationElementUnit = getCurrentWeatherElements().precipitationElementUnit;
-    precipitation.innerText = mmToInch(precipitation.innerText);
-    precipitationElementUnit.nodeValue = ' in'
-}
-
+  const precipitation = getCurrentWeatherElements().precipitationElement;
+  const precipitationElementUnit =
+    getCurrentWeatherElements().precipitationElementUnit;
+  precipitation.innerText = mmToInch(precipitation.innerText);
+  precipitationElementUnit.nodeValue = " in";
+};
 
 const changeprecipitationFromInchToMm = () => {
-    const precipitation = getCurrentWeatherElements().precipitationElement;
-        const precipitationElementUnit = getCurrentWeatherElements().precipitationElementUnit;
+  const precipitation = getCurrentWeatherElements().precipitationElement;
+  const precipitationElementUnit =
+    getCurrentWeatherElements().precipitationElementUnit;
 
-    precipitation.innerText = inchToMm(precipitation.innerText);
-        precipitationElementUnit.nodeValue = ' mm'
-
-}
+  precipitation.innerText = inchToMm(precipitation.innerText);
+  precipitationElementUnit.nodeValue = " mm";
+};
 
 const addSelectedIconAndClass = (element, i) => {
   element.append(checkMarkIcons[i]);
   element.classList.add("selected");
 };
 
+const changeAllElementsToImperial = () => {
+  changeTempToFarForAllElements();
+  changeWindSpeedToMphForAllElements();
+  changeprecipitationFromMmToInch();
+};
+
+const changeAllElementsToMetric = () => {
+  changeTempToCelForAllElements();
+  changeWindSpeedToKmhForAllElements();
+  changeprecipitationFromInchToMm();
+};
+
 const dropdownCallbacks = (e) => {
   if (
     !temperatureCel.classList.contains("selected") &&
-      (e.target === temperatureCel ||
-    e.target.parentElement === temperatureCel)
+    (e.target === temperatureCel || e.target.parentElement === temperatureCel)
   ) {
     changeTempToCelForAllElements();
     addSelectedIconAndClass(temperatureCel, 0);
     temperatureFar.classList.remove("selected");
   } else if (
     !temperatureFar.classList.contains("selected") &&
-      (e.target === temperatureFar ||
-    e.target.parentElement === temperatureFar)
+    (e.target === temperatureFar || e.target.parentElement === temperatureFar)
   ) {
     changeTempToFarForAllElements();
     addSelectedIconAndClass(temperatureFar, 0);
     temperatureCel.classList.remove("selected");
-  }else if (
+  } else if (
     !windspeedKmh.classList.contains("selected") &&
-      (e.target === windspeedKmh ||
-    e.target.parentElement === windspeedKmh)
+    (e.target === windspeedKmh || e.target.parentElement === windspeedKmh)
   ) {
     changeWindSpeedToKmhForAllElements();
     addSelectedIconAndClass(windspeedKmh, 1);
     windspeedMph.classList.remove("selected");
-  }else if (
+  } else if (
     !windspeedMph.classList.contains("selected") &&
-      (e.target === windspeedMph ||
-    e.target.parentElement === windspeedMph)
+    (e.target === windspeedMph || e.target.parentElement === windspeedMph)
   ) {
     changeWindSpeedToMphForAllElements();
     addSelectedIconAndClass(windspeedMph, 1);
     windspeedKmh.classList.remove("selected");
-  }else if (
+  } else if (
     !precipitationMm.classList.contains("selected") &&
-      (e.target === precipitationMm ||
-    e.target.parentElement === precipitationMm)
+    (e.target === precipitationMm || e.target.parentElement === precipitationMm)
   ) {
     changeprecipitationFromInchToMm();
     addSelectedIconAndClass(precipitationMm, 2);
     precipitationIn.classList.remove("selected");
-  }else if (
+  } else if (
     !precipitationIn.classList.contains("selected") &&
-      (e.target === precipitationIn ||
-    e.target.parentElement === precipitationIn)
+    (e.target === precipitationIn || e.target.parentElement === precipitationIn)
   ) {
     changeprecipitationFromMmToInch();
     addSelectedIconAndClass(precipitationIn, 2);
     precipitationMm.classList.remove("selected");
+  } else if (
+    e.target === systemSwitch ||
+    e.target.parentElement === systemSwitch
+  ) {
+    if (
+      e.target.dataset.unit === "metric" ||
+      e.target.parentElement.dataset.unit === "metric"
+    ) {
+      systemSwitch.dataset.unit = "imperial";
+      systemSwitch.innerText = "Switch to Metric";
+      changeAllElementsToImperial();
+      addSelectedIconAndClass(temperatureFar, 0);
+      temperatureCel.classList.remove("selected");
+      addSelectedIconAndClass(windspeedMph, 1);
+      windspeedKmh.classList.remove("selected");
+      addSelectedIconAndClass(precipitationIn, 2);
+      precipitationMm.classList.remove("selected");
+    } else {
+      systemSwitch.dataset.unit = "metric";
+      systemSwitch.innerText = "Switch to Imperial";
+      changeAllElementsToMetric();
+      addSelectedIconAndClass(temperatureCel, 0);
+      temperatureFar.classList.remove("selected");
+      addSelectedIconAndClass(windspeedKmh, 1);
+      windspeedMph.classList.remove("selected");
+      addSelectedIconAndClass(precipitationMm, 2);
+      precipitationIn.classList.remove("selected");
+    }
   }
 };
-
-
-
 
 iconDropdown.addEventListener("click", showUnitDropDown);
 dropdownContainer.addEventListener("click", dropdownCallbacks);
