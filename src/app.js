@@ -1,7 +1,7 @@
 import {
   getCurrentCityByLonAndLat,
 } from "./getApiData.js";
-import { getDropdownElements, getErrorElement } from "./getElements.js";
+import { getDropdownElements, getErrorElement, getHourlyWeatherElements } from "./getElements.js";
 
 
 import { getweatherInfoGotByUserLocation} from "./getLocationLogic.js";
@@ -23,6 +23,9 @@ window.onload = () => {
 export const setPsitionCallbck = async (pos) => {
   let currentLatitude = pos.coords.latitude;
   let currentLlongitude = pos.coords.longitude;
+  const currentDayElement = getHourlyWeatherElements().CurrentDayElement;
+  currentDayElement.dataset.currentLatitude = currentLatitude;
+  currentDayElement.dataset.currentLlongitude = currentLlongitude;
   let currentLocation;
   removeLoadingState();
   hideErrorElement();
@@ -31,7 +34,7 @@ export const setPsitionCallbck = async (pos) => {
       currentLatitude,
       currentLlongitude
     );
-    setWetherInfo(getweatherInfoGotByUserLocation(currentLatitude, currentLlongitude), currentLocation);
+    setWetherInfo(await getweatherInfoGotByUserLocation(currentLatitude, currentLlongitude), currentLocation);
   } catch (error) {
     console.log(error);
     throw error;

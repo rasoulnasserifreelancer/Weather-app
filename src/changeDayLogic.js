@@ -7,8 +7,8 @@ import { setHourlyWetherInfo } from "./setWeatherLogic.js";
 
 const currentDayElement = getHourlyWeatherElements().CurrentDayElement;
 
-currentDayElement.addEventListener("change", (e) => {
-  let weatherInfo = getweatherInfoGotByUserSearch() || getweatherInfoGotByUserLocation() ;
+currentDayElement.addEventListener("change", async (e) => {
+  let weatherInfo = getweatherInfoGotByUserSearch() || await getweatherInfoGotByUserLocation(e.target.dataset.currentLatitude, e.target.dataset.currentLlongitude) ;
   console.log(weatherInfo);
   for (let option of e.target) {
     if (option.value === e.target.value) {
