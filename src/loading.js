@@ -42,7 +42,7 @@ const removeLoadingStateOfCurrentWeatherPosterElement = () => {
               >
                 <img src="../assets/images/icon-sunny.webp" alt="" />
               </div>
-              <span><span id="deg" class="deg"></span><sup>°</sup></span>
+              <span class="deg"><span id="deg"></span><sup>°</sup></span>
             </div>`;
   currentWeatherPosterElement.classList.remove("loading");
 };

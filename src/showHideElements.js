@@ -9,7 +9,7 @@ export const hideWeatherInfoElements = () => {
 
 export const showWeatherInfoElements = () => {
   getCurrentWeatherElements().CurrentWeatherElement.style.display = "grid";
-  getDailyWeatherElements().DailyElement.style.display = "flex";
+  getDailyWeatherElements().DailyElement.style.display = "block";
   getHourlyWeatherElements().HourlyElement.style.display = "block";
 };
 

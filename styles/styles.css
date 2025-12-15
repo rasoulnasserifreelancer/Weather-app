@@ -8,6 +8,8 @@
     color: white;
     box-sizing: border-box;
   }
+
+
   :root {
     --Neutral900: hsl(243, 96%, 9%);
     --Neutral800: hsl(243, 27%, 20%);
@@ -31,6 +33,7 @@
     --color-panel-medium: var(--Neutral700);
     --color-panel-light: var(--Neutral600);
     --color-border: var(--Neutral300);
+    --color-lighter: var(--Neutral200);
     --color-btn-bg: var(--blue500);
     --color-btn-bg-hover: var(--blue700);
 
@@ -67,9 +70,7 @@
     background-color: var(--color-main-bg);
     color: var(--color-main-text);
     font-family: var(--primary-font), Arial, Helvetica, sans-serif;
-    height: 100vh;
     position: relative;
-    width: 100vw;
     font-weight: 500;
   }
 
@@ -79,18 +80,23 @@
     border: none;
   }
 
-  h1,
+  h1 {
+    font-family: var(--secondry-font), Arial, Helvetica, sans-serif;
+  }
+
   h2,
   h3 {
-    font-family: var(--secondry-font), Arial, Helvetica, sans-serif;
+    font: inherit;
+    font-family: var(--secondry-font), serif;
   }
   .wrapper {
     display: grid;
     grid-template-columns: 1fr calc(100% - calc(2rem)) 1fr;
 
-    @media (width >= 700) {
+    @media (width >= 700px) {
       grid-template-columns:
-        1fr min(calc(100% - calc(48 / 16 * 1rem)), calc(1216 / 16 * 1rem)) 1fr;
+        1fr min(calc(100% - calc(48 / 16 * 1rem)), calc(1216 / 16 * 1rem))
+        1fr;
     }
 
     > * {
@@ -147,18 +153,14 @@
       text-align: center;
       margin-bottom: 3rem;
       line-height: 1.2;
-      @media (width >= calc(600/16 * 1rem)) {
-        max-width: 12ch;
-        min-width: 10ch;
-      }
-      @media (width >= calc(900/16 * 1rem)) {
-        max-width: none;
+      @media (width <= calc(1000/16 * 1rem)) {
+        max-width: 15ch;
       }
     }
     .hero-section-search-container {
       display: grid;
       gap: 12px 16px;
-        @media (width >= calc(700/16 * 1rem)) {
+      @media (width >= calc(700/16 * 1rem)) {
         grid-template-columns: 2fr 1fr;
       }
     }
@@ -202,9 +204,18 @@
   .wether_info {
     .weather__info__container {
       display: grid;
-      row-gap: 32px;
+      grid-template-columns: 1fr;
+      row-gap: 48px;
+      column-gap: 32px;
+
+      @media (width >= calc(1000/16 *1rem)) {
+        grid-template-columns: 3fr 1fr;
+        grid-template-rows: auto auto;
+      }
     }
     .wether_info__current {
+      grid-column: 1;
+      grid-row: 1;
       display: grid;
       grid-template-columns: 1fr;
     }
@@ -238,7 +249,7 @@
     }
     .date {
       font-size: var(--font-size-date-panel-title);
-      color: var(--color-panel-light);
+      color: var(--color-lighter);
     }
     .wether_info_current_poster_city_degree_icon {
       display: flex;
@@ -246,8 +257,7 @@
       justify-content: space-evenly;
     }
     .wether_info_current_poster_city_location_degree_icon_icon {
-            width: 120px;
-
+      width: 120px;
     }
     .deg {
       font-size: var(--font-size-temp);
@@ -283,8 +293,106 @@
       }
     }
     .wether_info__daily {
+      grid-row: 2;
+      @media (width >= calc(1000/16 * 1rem)) {
+        grid-row: 2;
+        grid-column: 1;
+      }
+      .wether_info__daily_title {
+        font-size: var(--font-size-search-btn-daily-title-hour);
+        margin-bottom: 20px;
+      }
+      .wether_info__daily_forecast {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(3, 1fr);
+        @media (width >= calc(700/16 * 1rem)) {
+          grid-template-columns: repeat(7, 1fr);
+        }
+      }
+      .wether_info__daily_forecast_day {
+        /* width: 100%; */
+        background-color: var(--color-panel-dark);
+        border: 1px solid var(--color-panel-light);
+        padding: 16px 10px;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+      }
+      .wether_info__daily_forecast_day_title {
+        font-size: var(--font-size-search-btn-daily-title-hour);
+        color: var(--color-titles-text);
+      }
+      .wether_info__daily_forecast_day_icon {
+        width: 60px;
+        height: auto;
+      }
+      .wether_info__daily_forecast_day_minmax {
+        font-size: var(--font-size-hourly-temp);
+        align-self: stretch;
+        display: flex;
+        justify-content: space-between;
+      }
+      .min {
+      }
+      .max {
+      }
     }
     .wether_info__hourly {
+      grid-row: 3;
+      @media (width >= calc(1000/16 * 1rem)) {
+        grid-column: 2/3;
+        grid-row: 1/3;
+      }
+
+
+      .wether_info__hourly_content {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--color-panel-dark);
+        border-radius: 20px;
+        padding: 20px 16px;
+        @media (height >= calc(600.8/16 * 1rem)) and (width >= calc(1000/16 * 1rem)) {
+          max-height: calc(600.8/16 * 1rem);
+        overflow: auto;
+      }
+      }
+      .wether_info__hourly_title {
+        display: flex;
+        justify-content: space-between;
+        font-size: var(--font-size-search-btn-daily-title-hour);
+        font-weight: 700;
+        margin-bottom: 16px;
+      }
+      .wether_info__hourly_detail {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+        overflow: visible;
+      }
+      .wether_info__hourly_detail_day {
+        background: var(--color-panel-dark-hover);
+        border: 1px solid var(--color-panel-light);
+        border-radius: 8px;
+        padding: 10px 16px 10px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .wether_info__hourly_detail_day-condition {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .wether_info__hourly_detail_day-condition-icon {
+        width: 40px;
+        font-size: var(--font-size-search-btn-daily-title-hour);
+      }
+      .wether_info__hourly_detail_day-condition_temp {
+        font-size: var(--font-size-hourly-temp);
+      }
     }
   }
 }
