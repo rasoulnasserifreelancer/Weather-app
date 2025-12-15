@@ -33,8 +33,8 @@ const removeLoadingStateOfCurrentWeatherPosterElement = () => {
     getCurrentWeatherElements().CurrentWeatherPosterElement;
   currentWeatherPosterElement.innerHTML = `
             <div class="wether_info_current_poster_city_location_date">
-              <span id="location"></span>
-              <span id="date"></span>
+              <span id="location" class="location"></span>
+              <span id="date" class="date"></span>
             </div>
             <div class="wether_info_current_poster_city_degree_icon">
               <div
@@ -42,7 +42,7 @@ const removeLoadingStateOfCurrentWeatherPosterElement = () => {
               >
                 <img src="../assets/images/icon-sunny.webp" alt="" />
               </div>
-              <span><span id="deg"></span><sup>°</sup></span>
+              <span><span id="deg" class="deg"></span><sup>°</sup></span>
             </div>`;
   currentWeatherPosterElement.classList.remove("loading");
 };

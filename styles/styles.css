@@ -90,8 +90,7 @@
 
     @media (width >= 700) {
       grid-template-columns:
-        1fr min(calc(100% - calc(48 / 16 * 1rem)), calc(1216 / 16 * 1rem))
-        1fr;
+        1fr min(calc(100% - calc(48 / 16 * 1rem)), calc(1216 / 16 * 1rem)) 1fr;
     }
 
     > * {
@@ -159,6 +158,9 @@
     .hero-section-search-container {
       display: grid;
       gap: 12px 16px;
+        @media (width >= calc(700/16 * 1rem)) {
+        grid-template-columns: 2fr 1fr;
+      }
     }
     .hero-section-search-container-searchbar-result {
     }
@@ -213,10 +215,11 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        padding: 83px;
       }
       padding: 40px 24px;
       background-repeat: no-repeat;
-      background-position: center;
+      background-position: center bottom;
       background-size: cover;
       border-radius: 20px;
     }
@@ -253,6 +256,8 @@
     .wether_info_current_detail {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      margin-top: 20px;
+      gap: 16px;
 
       @media (width >= calc(700/16 * 1rem)) {
         grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -260,15 +265,21 @@
 
       & > * {
         width: 100%;
+        background-color: var(--color-panel-dark);
+        border: 1px solid var(--color-panel-light);
+        padding: 20px;
+        border-radius: 12px;
       }
 
       & > * p {
-        font-size: var(--font-size-date-panel-title);
-        color: var(--color-panel-medium);
+        font-size: var(--font-size-hourly-temp);
+        color: var(--color-titles-text);
+        margin-bottom: 24px;
       }
       & > * span {
         font-size: var(--font-size-panel-value);
-        color: var(--color-titles-text);
+        color: var(--color-main-text);
+        font-weight: 300;
       }
     }
     .wether_info__daily {
