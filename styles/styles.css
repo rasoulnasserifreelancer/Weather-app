@@ -91,15 +91,15 @@
   }
 
   @keyframes rotateScale {
-  from {
-    transform: rotateZ(0deg) scale(1);
-    opacity: 1;
+    from {
+      transform: rotateZ(0deg) scale(1);
+      opacity: 1;
+    }
+    to {
+      transform: rotateZ(360deg) scale(1.2);
+      opacity: 0.8;
+    }
   }
-  to {
-    transform: rotateZ(360deg) scale(1.2);
-    opacity: 0.8;
-  }
-}
 
   input,
   button {
@@ -221,6 +221,7 @@
     .icon-dropdown {
       display: flex;
       align-items: center;
+      field-sizing: var(--font-size-dropdown);
       gap: 0.2rem;
       margin-bottom: 3%;
       padding: 0.2rem 0.3rem;
@@ -414,7 +415,7 @@
       grid-template-columns: 1fr;
     }
     .wether_info_current_poster_city {
-            width: 100%;
+      width: 100%;
       height: 100%;
       background-image: url("../assets/images/bg-today-small.svg");
       @media (width >= calc(700/16 * 1rem)) {
@@ -480,7 +481,7 @@
       grid-template-columns: 1fr 1fr;
       margin-top: 20px;
       gap: 16px;
-            width: 100%;
+      width: 100%;
       height: 100%;
 
       @media (width >= calc(700/16 * 1rem)) {
@@ -508,7 +509,7 @@
     }
     .wether_info__daily {
       grid-row: 2;
-            width: 100%;
+      width: 100%;
       height: 100%;
       @media (width >= calc(1000/16 * 1rem)) {
         grid-row: 2;
@@ -519,8 +520,8 @@
         margin-bottom: 20px;
       }
       .wether_info__daily_forecast {
-              width: 100%;
-      height: 100%;
+        width: 100%;
+        height: 100%;
         display: grid;
         gap: 16px;
         grid-template-columns: repeat(3, 1fr);
@@ -529,8 +530,8 @@
         }
       }
       .wether_info__daily_forecast_day {
-              width: 100%;
-      height: 100%;
+        width: 100%;
+        height: 100%;
         /* width: 100%; */
         background-color: var(--color-panel-dark);
         border: 1px solid var(--color-panel-light);
@@ -562,7 +563,7 @@
     }
     .wether_info__hourly {
       grid-row: 3;
-            width: 100%;
+      width: 100%;
       height: 100%;
       @media (width >= calc(1000/16 * 1rem)) {
         grid-column: 2/3;
@@ -571,8 +572,8 @@
 
       .wether_info__hourly_content {
         display: flex;
-              width: 100%;
-      height: 100%;
+        width: 100%;
+        height: 100%;
         flex-direction: column;
         background-color: var(--color-panel-dark);
         border-radius: 20px;
@@ -599,15 +600,15 @@
 
       .wether_info__hourly_detail {
         display: grid;
-              width: 100%;
-      height: 100%;
+        width: 100%;
+        height: 100%;
         grid-template-columns: 1fr;
         gap: 16px;
         overflow: visible;
       }
       .wether_info__hourly_detail_day {
-              width: 100%;
-      height: 100%;
+        width: 100%;
+        height: 100%;
         background: var(--color-panel-dark-hover);
         border: 1px solid var(--color-panel-light);
         border-radius: 8px;
