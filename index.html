@@ -72,7 +72,7 @@
             </div>
             <ul id="dropdown-unit" class="dropdown-unit">
               <li class="unit">
-                <p id="system" data-unit="metric">Switch to Imperial</p>
+                <p id="system" class="system" data-unit="metric">Switch to Imperial</p>
               </li>
               <li class="unit">
                 <p class="unit_title">Temperature</p>
@@ -131,7 +131,8 @@
                   class="search-bar-img"
                 />
               </div>
-              <div id="search-container-result" class="search-result"></div>
+              <div id="search-container-result" class="search-result">
+              </div>
             </div>
             <button id="search_btn" class="search_btn">Search</button>
           </div>
@@ -256,7 +257,7 @@
             <div class="wether_info__hourly_content">
               <div class="wether_info__hourly_title">
                 <h2>Hourly forecast</h2>
-                <select aria-label="State" name="day" id="day">
+                <select aria-label="State" name="day" id="day" class="day">
                   <option value="Tuesday">Tuesday</option>
                   <option value="Wednesday">Wednesday</option>
                   <option value="Thursday">Thursday</option>

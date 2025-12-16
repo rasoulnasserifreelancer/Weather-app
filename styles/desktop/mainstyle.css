@@ -43,7 +43,6 @@
 
 #search-container-result {
   position: absolute;
-  width: 28.16vw;
   width: 100%;
   top: 120%;
   background-color: var(--Neutral600);
