@@ -65,16 +65,16 @@
             </a>
           </div>
           <div id="dropdown" class="dropdown">
-            <div id="icon-dropdown" class="icon-dropdown">
+            <div id="icon-dropdown" class="icon-dropdown" tabindex="0" role="listitem">
               <img src="./assets/images/icon-units.svg" alt="units" />
               <span>Units</span>
               <img src="./assets/images/icon-dropdown.svg" alt="dropdown" />
             </div>
-            <ul id="dropdown-unit" class="dropdown-unit">
-              <li class="unit">
+            <ul role="listbox" id="dropdown-unit" class="dropdown-unit" tabindex="0">
+              <li class="unit" role="listitem" tabindex="0">
                 <p id="system" class="system" data-unit="metric">Switch to Imperial</p>
               </li>
-              <li class="unit">
+              <li class="unit" role="listitem" tabindex="0">
                 <p class="unit_title">Temperature</p>
                 <div id="temperature-cel" class="selected">
                   <span>Celsius (°C)</span>
@@ -84,7 +84,7 @@
                   <span>Fahrenheit (°F)</span>
                 </div>
               </li>
-              <li class="unit">
+              <li class="unit" role="listitem" tabindex="0">
                 <p class="unit_title">Wind Speed</p>
                 <div id="windspeed-kmh" class="selected">
                   <span>km/h</span>
@@ -94,7 +94,7 @@
                   <span>mph</span>
                 </div>
               </li>
-              <li class="unit">
+              <li class="unit" role="listitem" tabindex="0">
                 <p class="unit_title">Precipitation</p>
                 <div id="precipitation-mm" class="selected">
                   <span>Millimeters (mm)</span>

@@ -158,6 +158,10 @@
       align-items: center;
       left: 1rem;
       top: 1rem;
+      @media(width<=700px) {
+        left: 0;
+        top: 0.5rem;
+      } 
     }
     &.hide {
       display: none;
