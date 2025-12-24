@@ -1,19 +1,29 @@
-
 import {
   getCurrentLonAndLatByCity,
   getwetherinfo,
   NotFoundError,
 } from "./getApiData.js";
-import { getCurrentWeatherElements, getErrorElement, getSearchElemensts } from "./getElements.js";
+import {
+  getCurrentWeatherElements,
+  getErrorElement,
+  getSearchElemensts,
+} from "./getElements.js";
 import { setWetherInfo } from "./setWeatherLogic.js";
-import { hideErrorElement, hideWeatherInfoElements, showErrorElement, showWeatherInfoElements, showLocationSearchResult } from "./showHideElements.js";
-
+import {
+  hideErrorElement,
+  hideWeatherInfoElements,
+  showErrorElement,
+  showWeatherInfoElements,
+  showLocationSearchResult,
+} from "./showHideElements.js";
 
 let weatherInfogotByUserSearch;
 
 const searchFormElement = getSearchElemensts().SearchResultContainerForm;
-const searchLocationSearchElement = getSearchElemensts().searchLocationSearchElement;
-const SearchResultContainerElement = getSearchElemensts().SearchResultContainerElement;
+const searchLocationSearchElement =
+  getSearchElemensts().searchLocationSearchElement;
+const SearchResultContainerElement =
+  getSearchElemensts().SearchResultContainerElement;
 
 console.log("running searchlocationlogic.js");
 
@@ -26,12 +36,18 @@ const getResultOfSearch = async (e) => {
     } catch (error) {
       if (error instanceof NotFoundError) {
         showLocationSearchResult(error.message);
-      }else if(error instanceof TypeError && error.message === 'Failed to fetch'){
-        console.log(error.message)
-        showErrorElement("network access error", "./assets/images/icon-retry.svg");
-      }else {
-      showErrorElement(`${error.reason}`, "../assets/images/icon-retry.svg");
-    }
+      } else if (
+        error instanceof TypeError &&
+        error.message === "Failed to fetch"
+      ) {
+        console.log(error.message);
+        showErrorElement(
+          "network access error",
+          "./assets/images/icon-retry.svg"
+        );
+      } else {
+        showErrorElement(`${error.reason}`, "../assets/images/icon-retry.svg");
+      }
     }
   }
   if (e.target.value.length <= 2) {
@@ -79,8 +95,6 @@ const deleteResult = () => {
   searchContainerResult.innerHTML = "";
 };
 
-
-
 SearchResultContainerElement.addEventListener("click", async (e) => {
   console.log(typeof e.target.tagName);
   console.log(e.target.dataset);
@@ -91,8 +105,8 @@ SearchResultContainerElement.addEventListener("click", async (e) => {
       const cityLongitude = e.target.dataset.longitude;
       const cityName = e.target.dataset.city;
       const countryName = e.target.dataset.country;
-      const location = {city : cityName, country:countryName};
-      weatherInfogotByUserSearch  = await Promise.all(
+      const location = { city: cityName, country: countryName };
+      weatherInfogotByUserSearch = await Promise.all(
         getwetherinfo(cityLatitude, cityLongitude)
       );
       deleteResult();
@@ -103,15 +117,18 @@ SearchResultContainerElement.addEventListener("click", async (e) => {
     } catch (error) {
       console.log(error);
       if (error instanceof NotFoundError) {
-      showErrorElement(`${error.message}`, "../assets/images/icon-retry.svg");
-    } else if (error instanceof TypeError && error.message === 'Failed to fetch') {
-      showErrorElement(
-        "network access error",
-        "../assets/images/icon-retry.svg"
-      );
-    } else {
-      showErrorElement(`${error.reason}`, "../assets/images/icon-retry.svg");
-    }
+        showErrorElement(`${error.message}`, "../assets/images/icon-retry.svg");
+      } else if (
+        error instanceof TypeError &&
+        error.message === "Failed to fetch"
+      ) {
+        showErrorElement(
+          "network access error",
+          "../assets/images/icon-retry.svg"
+        );
+      } else {
+        showErrorElement(`${error.reason}`, "../assets/images/icon-retry.svg");
+      }
     }
   }
 });
@@ -120,41 +137,57 @@ SearchResultContainerElement.addEventListener("click", async (e) => {
 //   getCurrentWeatherElements().locationElement.innerHTML = `${city}, ${country}`;
 // };
 
-
-searchFormElement.addEventListener('submit', async (e)=> {
+searchFormElement.addEventListener("submit", async (e) => {
   e.preventDefault();
   const inputValue = searchLocationSearchElement.value;
-  console.log("input value", inputValue)
-    try {
-      const result = await getCurrentLonAndLatByCity(inputValue);
-      // console.log(result);
-      const cityIndex = result?.cities?.findIndex((city) => city.toLowerCase() === inputValue.toLowerCase());
-      if (result.cities || cityIndex !== -1){
-        const city = result.cities[cityIndex];
-        const country = result.contries[cityIndex];
-        const location = {city, country}
-        const latitude = result.latitudes[cityIndex];
-        const longitude = result.longitudes[cityIndex];
-        weatherInfogotByUserSearch = await Promise.all(getwetherinfo(latitude, longitude));
-        deleteResult()
-        setWetherInfo(weatherInfogotByUserSearch, location);
-        // SetLocation(city, country);
-        showWeatherInfoElements()
-        // hideErrorElement();
-      }else {
-        // getErrorElement().ErrorDialogLable.innerText = "we couldn't find your city name, please try again ...";
-        hideWeatherInfoElements();
-        showErrorElement("we couldn't find your city name, please try again ...", "https://img.icons8.com/neon/96/delete-sign.png")
-      }
-    } catch (error) {
-      if (error instanceof NotFoundError) {
-        showErrorElement(`${error.message}`, "../assets/images/icon-retry.svg");
-      }else if(error instanceof TypeError){
-        showErrorElement("network access error", "../assets/images/icon-retry.svg");
-      }else {
-        showErrorElement(`${error?.message ? error.message : error}`, "../assets/images/icon-retry.svg");
-      }
+  try {
+    const result = await getCurrentLonAndLatByCity(inputValue);
+    const cityIndex =
+      inputValue.split(",").length < 2
+        ? result?.cities?.findIndex(
+            (city) => city.toLowerCase() === inputValue.toLowerCase()
+          )
+        : result?.cities?.findIndex(
+            (city) =>
+              city.toLowerCase() === inputValue.split(",")[0].toLowerCase()
+          );
+    if (cityIndex !== undefined && cityIndex !== -1) {
+      const city = result.cities[cityIndex];
+      const country = result.contries[cityIndex];
+      const location = { city, country };
+      const latitude = result.latitudes[cityIndex];
+      const longitude = result.longitudes[cityIndex];
+      weatherInfogotByUserSearch = await Promise.all(
+        getwetherinfo(latitude, longitude)
+      );
+      deleteResult();
+      setWetherInfo(weatherInfogotByUserSearch, location);
+      // SetLocation(city, country);
+      showWeatherInfoElements();
+      // hideErrorElement();
+    } else {
+      // getErrorElement().ErrorDialogLable.innerText = "we couldn't find your city name, please try again ...";
+      hideWeatherInfoElements();
+      showErrorElement(
+        "we couldn't find your city name, please try again ...",
+        "https://img.icons8.com/neon/96/delete-sign.png"
+      );
     }
-})
+  } catch (error) {
+    if (error instanceof NotFoundError) {
+      showErrorElement(`${error.message}`, "../assets/images/icon-retry.svg");
+    } else if (error instanceof TypeError) {
+      showErrorElement(
+        "network access error",
+        "../assets/images/icon-retry.svg"
+      );
+    } else {
+      showErrorElement(
+        `${error?.message ? error.message : error}`,
+        "../assets/images/icon-retry.svg"
+      );
+    }
+  }
+});
 
-export const getweatherInfoGotByUserSearch = () => weatherInfogotByUserSearch
+export const getweatherInfoGotByUserSearch = () => weatherInfogotByUserSearch;
